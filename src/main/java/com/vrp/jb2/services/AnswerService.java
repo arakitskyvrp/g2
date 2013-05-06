@@ -17,7 +17,7 @@ public interface AnswerService {
      * @param questionID id of question.
      * @return list of answers.
      */
-    public List getAnswersForQuestion(String questionID);
+    public List<Ts2__Answer__c> getAnswersForQuestion(String questionID);
 
     /**
      * Select answer by answersID id
@@ -25,7 +25,7 @@ public interface AnswerService {
      * @param answersID id of question.
      * @return list of answers.
      */
-    public Ts2__Answer__c getAnswersByID(String answersID);
+    public List<Ts2__Answer__c> getAnswersByID(String answersID);
 
     /**
      * Get answer translation.

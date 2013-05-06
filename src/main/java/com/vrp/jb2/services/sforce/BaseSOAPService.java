@@ -2,9 +2,11 @@ package com.vrp.jb2.services.sforce;
 
 import com.sforce.soap.enterprise.EnterpriseConnection;
 import com.sforce.soap.enterprise.QueryResult;
+import com.sforce.soap.enterprise.SaveResult;
 import com.sforce.soap.enterprise.sobject.SObject;
 import com.sforce.soap.services.SOAPConnectionService;
 import com.sforce.ws.ConnectionException;
+import org.apache.log4j.Logger;
 
 import javax.faces.bean.ManagedProperty;
 import java.text.MessageFormat;
@@ -14,7 +16,9 @@ import java.util.List;
 /**
  * Base for soap services working with Salesforce.
  */
-public abstract class BaseSOAPService{
+public abstract class BaseSOAPService {
+
+    private static final Logger LOG = Logger.getLogger(BaseSOAPService.class);
 
     @ManagedProperty(value = "#{soapConnectionService}")
     private SOAPConnectionService connectionService;
@@ -66,14 +70,13 @@ public abstract class BaseSOAPService{
             QueryResult queryResult = getConnection().query(query);
             return queryResult.getRecords();
         } catch (ConnectionException e) {
-            //todo move to log
-            e.printStackTrace();
+            LOG.error("Not execute the query :: " + query, e);
         }
         return null;
     }
 
     @SuppressWarnings("unchecked")
-    protected <T extends SObject> T getElementByParam(String queryPattern, String whereSqlPattern,Class<T> type, Object... params){
+    protected <T extends SObject> T getElementByParam(String queryPattern, String whereSqlPattern, Class<T> type, Object... params) {
         if (params == null) {
             return null;
         }
@@ -91,7 +94,7 @@ public abstract class BaseSOAPService{
     }
 
     @SuppressWarnings("unchecked")
-    protected <T extends SObject> List<T> getListElementsByParam(String queryPattern, String whereSqlPattern, Class<T> type, Object... params){
+    protected <T extends SObject> List<T> getListElementsByParam(String queryPattern, String whereSqlPattern, Class<T> type, Object... params) {
         if (params == null) {
             return new ArrayList<T>();
         }
@@ -108,7 +111,20 @@ public abstract class BaseSOAPService{
             }
         }
         return resultList;
+    }
 
+    protected SaveResult saveToSalesforce(SObject sObject) {
+        SObject[] sObjects = new SObject[1];
+        sObjects[0] = sObject;
+        try {
+            SaveResult[] create = getConnection().create(sObjects);
+            if (create != null && create.length > 0) {
+                return create[0];
+            }
+        } catch (ConnectionException e) {
+            LOG.error("Failed to save the object :: " + sObject, e);
+        }
+        return null;
     }
 
 }
