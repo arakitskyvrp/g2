@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum EncryptedFieldMaskChar {    /**   * Enumeration  : asterisk   */   asterisk,    /**   * Enumeration  : X   */   X,  }

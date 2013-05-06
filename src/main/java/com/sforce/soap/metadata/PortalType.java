@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum PortalType {    /**   * Enumeration  : CustomerSuccess   */   CustomerSuccess,    /**   * Enumeration  : Partner   */   Partner,    /**   * Enumeration  : Network   */   Network,  }

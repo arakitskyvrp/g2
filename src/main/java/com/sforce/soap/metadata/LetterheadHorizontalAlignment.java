@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum LetterheadHorizontalAlignment {    /**   * Enumeration  : None   */   None,    /**   * Enumeration  : Left   */   Left,    /**   * Enumeration  : Center   */   Center,    /**   * Enumeration  : Right   */   Right,  }

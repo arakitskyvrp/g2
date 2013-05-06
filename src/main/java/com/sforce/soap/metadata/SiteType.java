@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum SiteType {    /**   * Enumeration  : Siteforce   */   Siteforce,    /**   * Enumeration  : Visualforce   */   Visualforce,    /**   * Enumeration  : AppBuilder   */   AppBuilder,  }

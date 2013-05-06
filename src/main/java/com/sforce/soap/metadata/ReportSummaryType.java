@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ReportSummaryType {    /**   * Enumeration  : Sum   */   Sum,    /**   * Enumeration  : Average   */   Average,    /**   * Enumeration  : Maximum   */   Maximum,    /**   * Enumeration  : Minimum   */   Minimum,    /**   * Enumeration  : None   */   None,  }

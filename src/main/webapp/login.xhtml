@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<BODY>
+
+<h:body>
+<ui:composition template="#{pageController.template}">
+<ui:define name="body">
+		<h:panelGroup  rendered="#{register.OAuth_on_off}">
+			<h:form method="post" enctype="application/x-www-form-urlencoded">
+				<table class="atsFormTable">
+					<tr>
+						<td class="atsFormTdTitle" colspan="3">#{label.OAuthLoginInfo}</td>
+					</tr>
+					<tr>
+						<td class="atsFormTdRight">
+							<h:commandButton action="#{loginCT.loginWithFacebook}" value="#{label.loginWithFacebook}" class="atsButton"/>
+						</td>
+						<td class="atsFormTdRight">
+							<h:commandButton action="#{loginCT.loginWithLinkedin}" value="#{label.loginWithLinkedin}" class="atsButton"/>
+						</td>
+						<td class="atsFormTdRight">
+							<h:commandButton action="#{loginCT.loginWithGoogle}" value="#{label.loginWithGoogle}" class="atsButton"/>
+						</td>
+					</tr>
+				</table>
+			</h:form>
+		</h:panelGroup>		
+		<h:form id="atsForm" name="atsForm" method="post"  class="atsForm" enctype="application/x-www-form-urlencoded" >
+		<div class="errorMsg">
+			<h:outputText value="#{loginCT.errorMsg}"/>
+			<h:message for="atsForm" />
+		</div>
+		<table class="atsFormTable">
+			<tr>
+				<td colspan="2" id="atsFormTdRequiredText">
+					<span class="atsRequired">*</span>&#160;#{label.required}</td>
+			</tr>
+
+			<tr>
+				<td class="atsFormTdTitle" colspan="2">#{label.loginInfo}</td>
+			</tr>
+
+			<tr>
+				<td class="atsFormTdLeft"><label for="email">#{label.email}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight">
+					<div class="requiredInput">
+						<div class="requiredBlock"></div>
+						<h:inputText  class="atsInput" id="email" maxlength="80" name="email" size="20" type="text" value="#{loginCT.email}" required="true" requiredMessage="#{label.requiredMessage}"/>
+						<div class="errorMsg"><h:message for="email" /></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft">
+					<label for="password">#{label.password}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight" style="padding-right:0">
+					<h:inputSecret id="password" type="password" name="password" class="atsInput" value="#{loginCT.password}" required="true" requiredMessage="#{label.requiredMessage}"/>
+					<div class="errorMsg"><h:message for="password" /></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft"></td>
+				<td class="atsFormTdRight">
+					<h:commandButton action="#{loginCT.login()}" value="#{label.login}" class="atsButton"/>
+				</td>
+			</tr>
+	</table>
+</h:form>
+</ui:define>
+</ui:composition>
+
+
+</h:body>
+</BODY>
+
+</html>

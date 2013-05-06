@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+
+    <persistence-unit name="jobboard">
+	    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>com.jobboard.model.heroku.Candidate</class>
+		<class>com.jobboard.model.heroku.Cart</class>
+		<class>com.jobboard.model.heroku.Referral</class>
+		<class>com.jobboard.model.heroku.SearchAgent</class>
+		<class>com.jobboard.model.heroku.SearchAgentCriteria</class>
+		<class>com.jobboard.model.heroku.SFOrg</class>
+		<class>com.jobboard.model.heroku.Template</class>
+		<class>com.jobboard.model.heroku.TemplateType</class>
+		<class>com.jobboard.model.heroku.Translation_Table</class>
+		<properties>
+			<property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-23-21-85-197.compute-1.amazonaws.com:5432/d8i8ep9j6lbf2s?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
+<!-- 			<property name="sslfactory" value="org.postgresql.ssl.NonValidatingFactory"/> -->
+      		<property name="javax.persistence.jdbc.user" value="mjvakifezxkcsf"/>
+      		<property name="javax.persistence.jdbc.password" value="S5IphppOzieRIA8YUmpsMtYWap"/>
+     		<property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+     		<property name="eclipselink.target-database" value="PostgreSQL"/>
+			
+		</properties>
+	</persistence-unit>
+	
+	
+<!-- 		SF JPA !!! -->
+	
+	 <persistence-unit name="forceDatabase">
+        <provider>com.force.sdk.jpa.PersistenceProviderImpl</provider>
+        <!-- In a single module web application, no need to specify classes. Classes
+        will be autodiscovered based on @Entity annotation -->
+        <!-- 
+        <class>com.jobboard.model.sf.Contact</class>
+        
+        <class>com.jobboard.model.sf.Account</class>
+        <class>com.jobboard.model.sf.AccountContactRole</class>
+        <class>com.jobboard.model.sf.AccountHistory</class>
+        <class>com.jobboard.model.sf.AccountPartner</class>
+        <class>com.jobboard.model.sf.AccountShare</class>
+        <class>com.jobboard.model.sf.ActivityHistory</class>
+        <class>com.jobboard.model.sf.AdditionalNumber</class>
+        <class>com.jobboard.model.sf.AggregateResult</class>
+        <class>com.jobboard.model.sf.AnswerTranslation</class>
+        <class>com.jobboard.model.sf.ApexClass</class>
+        <class>com.jobboard.model.sf.ApexComponent</class>
+        <class>com.jobboard.model.sf.ApexLog</class>
+        <class>com.jobboard.model.sf.ApexPage</class>
+        <class>com.jobboard.model.sf.ApexTrigger</class>
+        <class>com.jobboard.model.sf.Approval</class>
+        <class>com.jobboard.model.sf.Asset</class>
+        <class>com.jobboard.model.sf.AssignmentRule</class>
+        <class>com.jobboard.model.sf.AsyncApexJob</class>
+        <class>com.jobboard.model.sf.Attachment</class>
+        <class>com.jobboard.model.sf.BrandTemplate</class>
+        <class>com.jobboard.model.sf.BusinessHours</class>
+        <class>com.jobboard.model.sf.BusinessProcess</class>
+        <class>com.jobboard.model.sf.CallCenter</class>
+        <class>com.jobboard.model.sf.Campaign</class>
+        <class>com.jobboard.model.sf.CampaignMember</class>
+        <class>com.jobboard.model.sf.CampaignMemberStatus</class>
+        <class>com.jobboard.model.sf.CampaignShare</class>
+        <class>com.jobboard.model.sf.CaseComment</class>
+        <class>com.jobboard.model.sf.CaseContactRole</class>
+        <class>com.jobboard.model.sf.CaseEntity</class>
+        <class>com.jobboard.model.sf.CaseHistory</class>
+        <class>com.jobboard.model.sf.CaseShare</class>
+        <class>com.jobboard.model.sf.CaseSolution</class>
+        <class>com.jobboard.model.sf.CaseStatus</class>
+        <class>com.jobboard.model.sf.CaseTeamMember</class>
+        <class>com.jobboard.model.sf.CaseTeamRole</class>
+        <class>com.jobboard.model.sf.CaseTeamTemplate</class>
+        <class>com.jobboard.model.sf.CaseTeamTemplateMember</class>
+        <class>com.jobboard.model.sf.CaseTeamTemplateRecord</class>
+        <class>com.jobboard.model.sf.CategoryData</class>
+        <class>com.jobboard.model.sf.CategoryNode</class>
+        <class>com.jobboard.model.sf.Community</class>
+        <class>com.jobboard.model.sf.ContactHistory</class>
+        <class>com.jobboard.model.sf.ContactShare</class>
+        <class>com.jobboard.model.sf.Contract</class>
+        <class>com.jobboard.model.sf.ContractContactRole</class>
+        <class>com.jobboard.model.sf.ContractHistory</class>
+        <class>com.jobboard.model.sf.ContractStatus</class>
+        <class>com.jobboard.model.sf.CronTrigger</class>
+        <class>com.jobboard.model.sf.Dashboard</class>
+        <class>com.jobboard.model.sf.DashboardComponent</class>
+        <class>com.jobboard.model.sf.Document</class>
+        <class>com.jobboard.model.sf.DocumentAttachmentMap</class>
+        <class>com.jobboard.model.sf.EmailServicesAddress</class>
+        <class>com.jobboard.model.sf.EmailServicesFunction</class>
+        <class>com.jobboard.model.sf.EmailStatus</class>
+        <class>com.jobboard.model.sf.EmailTemplate</class>
+        <class>com.jobboard.model.sf.Event</class>
+        <class>com.jobboard.model.sf.EventAttendee</class>
+        <class>com.jobboard.model.sf.FiscalYearSettings</class>
+        <class>com.jobboard.model.sf.Folder</class>
+        <class>com.jobboard.model.sf.ForecastShare</class>
+        <class>com.jobboard.model.sf.Group</class>
+        <class>com.jobboard.model.sf.GroupMember</class>
+        <class>com.jobboard.model.sf.Holiday</class>
+        <class>com.jobboard.model.sf.Idea</class>
+        <class>com.jobboard.model.sf.IdeaComment</class>
+        <class>com.jobboard.model.sf.JBSComplianceQuestions</class>
+        <class>com.jobboard.model.sf.JBSSocialQuestions</class>
+        <class>com.jobboard.model.sf.JBSStandardQuestions</class>
+        <class>com.jobboard.model.sf.Language</class>
+        <class>com.jobboard.model.sf.Lead</class>
+        <class>com.jobboard.model.sf.LeadHistory</class>
+        <class>com.jobboard.model.sf.LeadShare</class>
+        <class>com.jobboard.model.sf.LeadStatus</class>
+        <class>com.jobboard.model.sf.LoginHistory</class>
+        <class>com.jobboard.model.sf.MailmergeTemplate</class>
+        <class>com.jobboard.model.sf.Name</class>
+        <class>com.jobboard.model.sf.Note</class>
+        <class>com.jobboard.model.sf.NoteAndAttachment</class>
+        <class>com.jobboard.model.sf.OpenActivity</class>
+        <class>com.jobboard.model.sf.Opportunity</class>
+        <class>com.jobboard.model.sf.OpportunityCompetitor</class>
+        <class>com.jobboard.model.sf.OpportunityContactRole</class>
+        <class>com.jobboard.model.sf.OpportunityFieldHistory</class>
+        <class>com.jobboard.model.sf.OpportunityHistory</class>
+        <class>com.jobboard.model.sf.OpportunityLineItem</class>
+        <class>com.jobboard.model.sf.OpportunityPartner</class>
+        <class>com.jobboard.model.sf.OpportunityShare</class>
+        <class>com.jobboard.model.sf.Organization</class>
+        <class>com.jobboard.model.sf.OrgWideEmailAddress</class>
+        <class>com.jobboard.model.sf.Partner</class>
+        <class>com.jobboard.model.sf.PartnerRole</class>
+        <class>com.jobboard.model.sf.Period</class>
+        <class>com.jobboard.model.sf.PermissionSet</class>
+        <class>com.jobboard.model.sf.PermissionSetAssignment</class>
+        <class>com.jobboard.model.sf.Pricebook2</class>
+        <class>com.jobboard.model.sf.PricebookEntry</class>
+        <class>com.jobboard.model.sf.ProcessInstance</class>
+        <class>com.jobboard.model.sf.ProcessInstanceHistory</class>
+        <class>com.jobboard.model.sf.ProcessInstanceStep</class>
+        <class>com.jobboard.model.sf.ProcessInstanceWorkitem</class>
+        <class>com.jobboard.model.sf.Product2</class>
+        <class>com.jobboard.model.sf.Profile</class>
+        <class>com.jobboard.model.sf.PushTopic</class>
+        <class>com.jobboard.model.sf.QuestionsTranslation</class>
+        <class>com.jobboard.model.sf.QueueSobject</class>
+        <class>com.jobboard.model.sf.RecordType</class>
+        <class>com.jobboard.model.sf.Report</class>
+        <class>com.jobboard.model.sf.Scontrol</class>
+        <class>com.jobboard.model.sf.SelfServiceUser</class>
+        <class>com.jobboard.model.sf.Site</class>
+        <class>com.jobboard.model.sf.SiteDomain</class>
+        <class>com.jobboard.model.sf.SiteHistory</class>
+        <class>com.jobboard.model.sf.Solution</class>
+        <class>com.jobboard.model.sf.SolutionHistory</class>
+        <class>com.jobboard.model.sf.SolutionStatus</class>
+        <class>com.jobboard.model.sf.StaticResource</class>
+        <class>com.jobboard.model.sf.TagDefinition</class>
+        <class>com.jobboard.model.sf.Task</class>
+        <class>com.jobboard.model.sf.TaskPriority</class>
+        <class>com.jobboard.model.sf.TaskStatus</class>
+        
+        
+        <class>com.jobboard.model.sf.Ts2Answer</class>
+        <class>com.jobboard.model.sf.Ts2ApplicantManagementSystem</class>
+        <class>com.jobboard.model.sf.Ts2Application</class>
+        <class>com.jobboard.model.sf.Ts2Assessment</class>
+        <class>com.jobboard.model.sf.Ts2Assessments</class>
+        <class>com.jobboard.model.sf.Ts2Certification</class>
+        <class>com.jobboard.model.sf.Ts2Config</class>
+        <class>com.jobboard.model.sf.Ts2Contracts</class>
+        <class>com.jobboard.model.sf.Ts2DebugLog</class>
+        <class>com.jobboard.model.sf.Ts2DebugSettings</class>
+        <class>com.jobboard.model.sf.Ts2Descriptions</class>
+        <class>com.jobboard.model.sf.Ts2EducationHistory</class>
+        <class>com.jobboard.model.sf.Ts2EmploymentHistory</class>
+        <class>com.jobboard.model.sf.Ts2extamsAMSFilter</class>
+        <class>com.jobboard.model.sf.Ts2extamsCustomMoveAction</class>
+        <class>com.jobboard.model.sf.Ts2extamsCustomStage1</class>
+        <class>com.jobboard.model.sf.Ts2extamsCustomStage2</class>
+        <class>com.jobboard.model.sf.Ts2extamsCustomStage3</class>
+        <class>com.jobboard.model.sf.Ts2extamsCustomStage4</class>
+        <class>com.jobboard.model.sf.Ts2extamsCustomStage5</class>
+        <class>com.jobboard.model.sf.Ts2extamsFilterItem</class>
+        <class>com.jobboard.model.sf.Ts2extamsObjectMapper</class>
+        <class>com.jobboard.model.sf.Ts2Interview</class>
+        <class>com.jobboard.model.sf.Ts2Job</class>
+        <class>com.jobboard.model.sf.Ts2JobBoardSetup</class>
+        <class>com.jobboard.model.sf.Ts2JobNotification</class>
+        <class>com.jobboard.model.sf.Ts2JobOrderJobBoardAssociation</class>
+        <class>com.jobboard.model.sf.Ts2JobOrderTransalation</class>
+        <class>com.jobboard.model.sf.Ts2JobsciencePermissions</class>
+        <class>com.jobboard.model.sf.Ts2JobTemplateMapping</class>
+        <class>com.jobboard.model.sf.Ts2MappingItem</class>
+        <class>com.jobboard.model.sf.Ts2Offer</class>
+        <class>com.jobboard.model.sf.Ts2ParserSettings</class>
+        <class>com.jobboard.model.sf.Ts2PicklistMapping</class>
+        <class>com.jobboard.model.sf.Ts2Placement</class>
+        <class>com.jobboard.model.sf.Ts2Prescreen2</class>
+        <class>com.jobboard.model.sf.Ts2ProjectJob</class>
+        <class>com.jobboard.model.sf.Ts2Question</class>
+        <class>com.jobboard.model.sf.Ts2QuestionSet</class>
+        <class>com.jobboard.model.sf.Ts2Reference</class>
+        <class>com.jobboard.model.sf.Ts2Referral</class>
+        <class>com.jobboard.model.sf.Ts2ResultSetConfig</class>
+        <class>com.jobboard.model.sf.Ts2Search</class>
+        <class>com.jobboard.model.sf.Ts2SearchAgent</class>
+        <class>com.jobboard.model.sf.Ts2SearchSettings</class>
+        <class>com.jobboard.model.sf.Ts2SFDCContactConnector</class>
+        <class>com.jobboard.model.sf.Ts2ShortURL</class>
+        <class>com.jobboard.model.sf.Ts2Skill</class>
+        <class>com.jobboard.model.sf.Ts2Skills</class>
+        <class>com.jobboard.model.sf.Ts2SNamedSearch</class>
+        <class>com.jobboard.model.sf.Ts2SocialSettings</class>
+        <class>com.jobboard.model.sf.Ts2Source</class>
+        <class>com.jobboard.model.sf.Ts2SResultItem</class>
+        <class>com.jobboard.model.sf.Ts2SResultSet</class>
+        <class>com.jobboard.model.sf.Ts2SSearchConfig</class>
+        <class>com.jobboard.model.sf.Ts2SSearchCriteria</class>
+        <class>com.jobboard.model.sf.Ts2SSearchFilter</class>
+        <class>com.jobboard.model.sf.Ts2SSearchLog</class>
+        <class>com.jobboard.model.sf.Ts2SSearchSkill</class>
+        <class>com.jobboard.model.sf.Ts2StandardQuestion</class>
+        <class>com.jobboard.model.sf.Ts2Submittal</class>
+        <class>com.jobboard.model.sf.Ts2SUserList</class>
+        <class>com.jobboard.model.sf.Ts2SUserListLink</class>
+        <class>com.jobboard.model.sf.Ts2Taxonomies</class>
+        
+        
+        <class>com.jobboard.model.sf.User</class>
+        <class>com.jobboard.model.sf.UserLicense</class>
+        <class>com.jobboard.model.sf.UserPreference</class>
+        <class>com.jobboard.model.sf.UserRole</class>
+        <class>com.jobboard.model.sf.Vote</class>
+        <class>com.jobboard.model.sf.WebLink</class>
+        
+         -->
+        
+        <exclude-unlisted-classes/>
+        <properties>
+            <property name="datanucleus.storeManagerType" value="force" />
+            <property name="datanucleus.ConnectionURL" 
+            	value="force://login.salesforce.com?user=risto.kavalinovski@76demo.com&amp;password=Jobsience1XsuSnF52H3eKf8O3nzE0R22QI" />
+            	      
+            <property name="datanucleus.autoCreateSchema" value="false" />
+            <property name="datanucleus.autoCreateWarnOnError" value="false" />
+            <property name="datanucleus.validateTables" value="false" />
+            <property name="datanucleus.validateConstraints" value="false" />
+            <property name="datanucleus.Optimistic" value="false" />
+            <property name="datanucleus.datastoreTransactionDelayOperations" value="true" />
+            <property name="datanucleus.jpa.addClassTransformer" value="false" />
+            <property name="datanucleus.cache.level2.type" value="none" />
+            <property name="datanucleus.detachAllOnCommit" value="true" />
+            <property name="datanucleus.copyOnAttach" value="false" />
+        </properties>
+    </persistence-unit>
+	
+	
+
+</persistence>

@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ActionOverrideType {    /**   * Enumeration  : Default   */   Default,    /**   * Enumeration  : Standard   */   Standard,    /**   * Enumeration  : Scontrol   */   Scontrol,    /**   * Enumeration  : Visualforce   */   Visualforce,  }

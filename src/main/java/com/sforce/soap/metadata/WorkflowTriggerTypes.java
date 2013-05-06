@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum WorkflowTriggerTypes {    /**   * Enumeration  : onCreateOnly   */   onCreateOnly,    /**   * Enumeration  : onCreateOrTriggeringUpdate   */   onCreateOrTriggeringUpdate,    /**   * Enumeration  : onAllChanges   */   onAllChanges,  }

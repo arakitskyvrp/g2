@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum FolderAccessTypes {    /**   * Enumeration  : Shared   */   Shared,    /**   * Enumeration  : Public   */   Public,    /**   * Enumeration  : Hidden   */   Hidden,    /**   * Enumeration  : PublicInternal   */   PublicInternal,  }

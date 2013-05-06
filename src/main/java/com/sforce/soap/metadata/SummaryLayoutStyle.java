@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum SummaryLayoutStyle {    /**   * Enumeration  : Default   */   Default,    /**   * Enumeration  : QuoteTemplate   */   QuoteTemplate,    /**   * Enumeration  : DefaultQuoteTemplate   */   DefaultQuoteTemplate,    /**   * Enumeration  : CaseInteraction   */   CaseInteraction,  }

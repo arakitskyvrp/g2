@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ActionEmailSenderType {    /**   * Enumeration  : CurrentUser   */   CurrentUser,    /**   * Enumeration  : OrgWideEmailAddress   */   OrgWideEmailAddress,    /**   * Enumeration  : DefaultWorkflowUser   */   DefaultWorkflowUser,  }

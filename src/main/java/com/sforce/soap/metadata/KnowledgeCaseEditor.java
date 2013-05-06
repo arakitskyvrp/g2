@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum KnowledgeCaseEditor {    /**   * Enumeration  : simple   */   simple,    /**   * Enumeration  : standard   */   standard,  }

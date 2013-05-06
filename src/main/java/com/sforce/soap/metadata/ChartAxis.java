@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ChartAxis {    /**   * Enumeration  : x   */   x,    /**   * Enumeration  : y   */   y,    /**   * Enumeration  : y2   */   y2,    /**   * Enumeration  : r   */   r,  }

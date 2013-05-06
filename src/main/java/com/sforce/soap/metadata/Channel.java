@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum Channel {    /**   * Enumeration  : AllChannels   */   AllChannels,    /**   * Enumeration  : App   */   App,    /**   * Enumeration  : Pkb   */   Pkb,    /**   * Enumeration  : Csp   */   Csp,    /**   * Enumeration  : Prm   */   Prm,  }

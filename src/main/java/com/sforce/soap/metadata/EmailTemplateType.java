@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum EmailTemplateType {    /**   * Enumeration  : text   */   text,    /**   * Enumeration  : html   */   html,    /**   * Enumeration  : custom   */   custom,    /**   * Enumeration  : visualforce   */   visualforce,  }

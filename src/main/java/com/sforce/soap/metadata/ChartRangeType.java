@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ChartRangeType {    /**   * Enumeration  : Auto   */   Auto,    /**   * Enumeration  : Manual   */   Manual,  }

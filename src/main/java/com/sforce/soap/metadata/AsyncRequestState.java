@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum AsyncRequestState {    /**   * Enumeration  : Queued   */   Queued,    /**   * Enumeration  : InProgress   */   InProgress,    /**   * Enumeration  : Completed   */   Completed,    /**   * Enumeration  : Error   */   Error,  }

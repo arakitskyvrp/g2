@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ApexCodeUnitStatus {    /**   * Enumeration  : Inactive   */   Inactive,    /**   * Enumeration  : Active   */   Active,    /**   * Enumeration  : Deleted   */   Deleted,  }

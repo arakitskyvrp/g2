@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum EmailToCaseOnFailureActionType {    /**   * Enumeration  : Bounce   */   Bounce,    /**   * Enumeration  : Discard   */   Discard,    /**   * Enumeration  : Requeue   */   Requeue,  }

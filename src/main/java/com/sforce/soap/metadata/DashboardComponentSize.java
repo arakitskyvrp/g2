@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum DashboardComponentSize {    /**   * Enumeration  : Narrow   */   Narrow,    /**   * Enumeration  : Medium   */   Medium,    /**   * Enumeration  : Wide   */   Wide,  }

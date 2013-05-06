@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum WebLinkDisplayType {    /**   * Enumeration  : link   */   link,    /**   * Enumeration  : button   */   button,    /**   * Enumeration  : massActionButton   */   massActionButton,  }

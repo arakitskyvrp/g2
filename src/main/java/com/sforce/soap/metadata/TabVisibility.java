@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum TabVisibility {    /**   * Enumeration  : Hidden   */   Hidden,    /**   * Enumeration  : DefaultOff   */   DefaultOff,    /**   * Enumeration  : DefaultOn   */   DefaultOn,  }

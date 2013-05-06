@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum AuthenticationProtocol {    /**   * Enumeration  : NoAuthentication   */   NoAuthentication,    /**   * Enumeration  : Oauth   */   Oauth,    /**   * Enumeration  : Password   */   Password,  }

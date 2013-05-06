@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum PortalRoles {    /**   * Enumeration  : Executive   */   Executive,    /**   * Enumeration  : Manager   */   Manager,    /**   * Enumeration  : Worker   */   Worker,    /**   * Enumeration  : PersonAccount   */   PersonAccount,  }

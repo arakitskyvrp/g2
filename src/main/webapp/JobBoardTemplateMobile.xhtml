@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+  <title><ui:insert name="title">Welcome to our Career Site Mobile</ui:insert></title>
+  
+  <script type="text/javascript">
+	var dateObject=new Date();
+  </script>
+  
+  <!-- CSS - Setup -->
+  <h:outputStylesheet library="css" name="style.css"  />
+  <h:outputStylesheet library="css" name="base.css"  />
+  <h:outputStylesheet library="css" name="grid.css"  />
+  
+  <!-- CSS - CURENT Background theme -->
+  <h:outputStylesheet library="css" name="/themes/light.css"  />
+  
+  <!-- CSS - CURRENT Color Scheme -->
+  <h:outputStylesheet library="css" name="/themes/blue.css"  />
+  
+  <!-- CSS - Job Board -->
+  <h:outputStylesheet library="css" name="calendar.css"  />
+  <h:outputStylesheet library="css" name="jobboard.css"  />
+  <h:outputScript library="js" name="modernizr-1.5.min.js" />
+  <h:outputScript library="js" name="jquery-1.4.2.min.js" />
+  <h:outputScript library="js" name="cufon.js" />
+  <h:outputScript library="js" name="Aller.font.js" />
+  
+  <script type="text/javascript">
+	$.noConflict();
+	jQuery(document).ready(function(jQuery) {
+	//Cufon Setup
+   	Cufon.replace('#atsSearchTitle, #atsSearchResultsTitle, .atsFormTdTitle, .topPanelContainer .title, .atsDisplayTdTitle');
+	}); 
+  </script>
+  </h:head>
+
+
+<h:body>
+
+<div id="wrapper"> 
+    <!-- Start Header -->
+    <ui:insert name="header">
+        <!-- Logo -->
+        <h1 id="logo">
+            <a href="#">
+                <!-- Change img src -->
+<!--                 <img src="" alt="logo" title="logo"/> -->
+            </a>
+        </h1>
+        <!-- nav --> 
+        <br class="cl" />
+    </ui:insert>
+    
+    <!-- Page Container -->
+    <div id="page"> 
+        <!-- Page Title -->
+        <h2 class="ribbon blue full">Careers Mobile</h2>
+        <div class="triangle-ribbon blue"></div>
+        <br class="cl" />
+        <!-- Page Content -->
+        <div id="content" class="two-col container_12">
+        <ui:insert name="content">
+<!--             <ts2:LoggedInLegend ></ts2:LoggedInLegend> -->
+            <div class="grid_12">
+                <ui:insert name="body"/>
+            </div>
+            <br class="cl" />
+        </ui:insert>
+        </div>
+        
+        <!-- Page Sidebar -->
+        <aside>
+            <div class="sidebar-nav">
+                <ul class="careers-link">
+                    <li class="first current"><a href="#">Careers</a></li>
+                </ul>
+<!--                 <ts2:Menu ></ts2:Menu> -->
+            </div>
+        </aside>
+        <br class="cl" />
+    </div>
+    
+    <!-- Footer Start -->
+    <ui:insert name="footer">
+        <p>Copyright ©<script type="text/javascript">document.write(dateObject.getFullYear());</script> | Powered by <a href="http://www.jobscience.com/recruiting" target="_blank">Jobscience Recruiting</a></p>
+        <br class="cl" />
+    </ui:insert>
+</div>
+
+</h:body>
+
+</html>

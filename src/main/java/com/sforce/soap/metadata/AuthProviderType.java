@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum AuthProviderType {    /**   * Enumeration  : Facebook   */   Facebook,    /**   * Enumeration  : Janrain   */   Janrain,    /**   * Enumeration  : Salesforce   */   Salesforce,  }

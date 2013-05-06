@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<BODY>
+
+	<h:body>
+
+		<ui:composition template="#{pageController.template}">
+			<ui:define name="body">
+				<div id="atsSearchTitle">
+					<h:outputText value="Cover Letter" />
+				</div>
+				<!-- 				<table> -->
+				<!-- 					<tr> -->
+				<!-- 						<td class="atsDisplayTdTitle" colSpan="3">Cover Letter</td> -->
+				<!-- 					</tr> -->
+				<!-- 				</table> -->
+				<h:form>
+					<p:inputTextarea rows="8" cols="66"
+						value="#{workflowController.coverLetter}"></p:inputTextarea>
+					<table>
+						<tr>
+							<td><p:commandButton
+									rendered="#{workflowController.hasPreviousStep}"
+									value="Back" action="#{workflowController.back}"
+									ajax="false"></p:commandButton></td>
+							<td><p:commandButton
+									rendered="#{workflowController.hasNextStep}"
+									value="Continue"
+									action="#{workflowController.continueApplication}"
+									ajax="false"></p:commandButton> <p:commandButton
+									rendered="#{!workflowController.hasNextStep}" value="Submit"
+									action="#{workflowController.submit}" ajax="false"></p:commandButton>
+							</td>
+						</tr>
+					</table>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+
+
+
+	</h:body>
+</BODY>
+</html>

@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ChartPosition {    /**   * Enumeration  : CHART_TOP   */   CHART_TOP,    /**   * Enumeration  : CHART_BOTTOM   */   CHART_BOTTOM,  }

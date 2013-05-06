@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum LayoutSectionStyle {    /**   * Enumeration  : TwoColumnsTopToBottom   */   TwoColumnsTopToBottom,    /**   * Enumeration  : TwoColumnsLeftToRight   */   TwoColumnsLeftToRight,    /**   * Enumeration  : OneColumn   */   OneColumn,    /**   * Enumeration  : CustomLinks   */   CustomLinks,  }

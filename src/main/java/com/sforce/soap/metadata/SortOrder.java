@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum SortOrder {    /**   * Enumeration  : Asc   */   Asc,    /**   * Enumeration  : Desc   */   Desc,  }

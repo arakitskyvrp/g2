@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<BODY>
+
+	<h:body>
+
+		<ui:composition template="#{pageController.template}">
+			<ui:define name="body">
+				<h:form>
+					<p:fieldset legend="Your Applications">
+						<h:outputText value="No Applications found"
+							rendered="#{!applicationsController.hasApplications}" />
+						<p:dataTable id="applicationsTable" var="app"
+							value="#{applicationsController.applications}"
+							rendered="#{applicationsController.hasApplications}">
+							<p:column headerText="Date">
+								<h:outputText value="#{applicationsController.parseDate(app.createdDate)}" />
+							</p:column>
+							<p:column headerText="Job Title">
+								<h:outputText value="#{app.ts2__Job__r.name}" />
+							</p:column>
+							<p:column headerText="Location">
+								<h:outputText
+									value="#{app.ts2__Job__r.ts2__Location__c}" />
+							</p:column>
+							<p:column headerText="Status">
+								<h:outputText value="#{app.ts2__App_Status__c}" />
+							</p:column>
+						</p:dataTable>
+					</p:fieldset>
+				</h:form>
+
+			</ui:define>
+		</ui:composition>
+
+
+
+	</h:body>
+</BODY>
+</html>

@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum NetworkStatus {    /**   * Enumeration  : Live   */   Live,    /**   * Enumeration  : DownForMaintenance   */   DownForMaintenance,    /**   * Enumeration  : UnderConstruction   */   UnderConstruction,  }

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<BODY>
+
+
+<h:body>
+<ui:composition template="#{pageController.template}">
+<ui:define name="body">
+		#{register.checkRegistrationMethod('SIMPLE')}
+		<h:panelGroup  rendered="#{register.OAuth_on_off}">
+			<h:form method="post" enctype="application/x-www-form-urlencoded">
+				<table class="atsFormTable">
+					<tr>
+						<td class="atsFormTdTitle" colspan="3">#{label.OAuthInfo}</td>
+					</tr>
+					<tr>
+						<h:panelGroup  rendered="#{register.isFacebook_on_off}">
+							<td class="atsFormTdRight">
+								<h:commandButton action="#{register.registerWithFacebook}" value="#{label.registerWithFacebook}" class="atsButton"/>
+							</td>
+						</h:panelGroup>
+						<h:panelGroup  rendered="#{register.isLinkedIn_on_off}">
+							<td class="atsFormTdRight">
+								<h:commandButton action="#{register.registerWithLinkedin}" value="#{label.registerWithLinkedin}" class="atsButton"/>
+							</td>
+						</h:panelGroup>
+						<h:panelGroup  rendered="#{register.isGooglePlus_on_off}">
+							<td class="atsFormTdRight">
+								<h:commandButton action="#{register.registerWithGoogle}" value="#{label.registerWithGoogle}" class="atsButton"/>
+							</td>
+						</h:panelGroup>
+					</tr>
+				</table>
+			</h:form>
+		</h:panelGroup>
+
+		<h:form id="atsForm" name="atsForm" method="post"  class="atsForm" enctype="application/x-www-form-urlencoded" >
+		<div class="errorMsg"><h:message for="atsForm" /></div>
+		<table class="atsFormTable">
+			<tr>
+				<td colspan="2" id="atsFormTdRequiredText">
+					<span class="atsRequired">*</span>&#160;#{label.required}</td>
+			</tr>
+
+			<tr>
+				<td class="atsFormTdTitle" colspan="2">#{label.loginInfo}</td>
+			</tr>
+
+			<tr>
+				<td class="atsFormTdLeft"><label for="email">#{label.email}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight">
+					<div class="requiredInput">
+						<div class="requiredBlock"></div>
+						<h:inputText  class="atsInput" id="email" maxlength="80" name="email" size="20" type="text" value="#{userProfile.email}" validator="#{userProfile.validateEmail}" required="true" requiredMessage="#{label.requiredMessage}"/>
+						<div class="errorMsg"><h:message for="email" /></div>
+					</div>
+					<span id="tnemail" style="display: none;"></span>
+				</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft">
+					<label for="password">#{label.password}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight" style="padding-right:0">
+					<h:inputSecret id="password" type="password" name="password" maxlength="20" class="atsInput" value="#{userProfile.password}" validator="#{userProfile.validatePassword}" required="true" requiredMessage="#{label.requiredMessage}"/>
+					<img id ="infoIcon" name="infoIcon" class="infoIcon" src="/resources/img/icons/information.png" style="position:relative;" />				
+					<div id="mouseOverInfoOuter" class="mouseOverInfoOuter" style='display: none; position: absolute; border: solid black 1px; padding: 10px; background-color: #fffcd1; width: 235px;' >
+						<h:outputText value="#{label.passwordUserInfo}"/>
+					</div>
+					<div class="errorMsg"><h:message for="password" /></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft">
+					<label for="confirmPassword">#{label.confirmPassword}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight">
+					<h:inputSecret id="confirmPassword" type="password" maxlength="20" name="confirmPassword" class="atsInput" value="#{userProfile.confirmPassword}" validator="#{userProfile.validateConfirmPassword}" required="true" requiredMessage="#{label.requiredMessage}"/>
+					<div class="errorMsg"><h:message for="confirmPassword" /></div>
+				</td>
+			</tr>    
+			<tr>
+				<td class="atsFormTdTitle" colspan="2">#{label.personalInfo}</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft">
+					<label for="firstName">#{label.firstName}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight">
+					<div class="requiredInput">
+						<div class="requiredBlock"></div>
+						<h:inputText  class="error atsInput" id="firstName" maxlength="40" name="firstName" size="20" type="text" value="#{userProfile.firstName}" required="true" requiredMessage="#{label.requiredMessage}"/>
+						<div class="errorMsg"><h:message for="firstName" /></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft"><label for="lastName">#{label.lastName}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight">
+					<div class="requiredInput">
+						<div class="requiredBlock"></div>
+						<h:inputText  class="error atsInput" id="lastName" maxlength="80" name="lastName" size="20" type="text" value="#{userProfile.lastName}" required="true" requiredMessage="#{label.requiredMessage}"/>
+						<div class="errorMsg"><h:message for="lastName" /></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft">
+					<label for="phone">#{label.phone}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight">
+					<div class="requiredInput">
+						<div class="requiredBlock"></div>
+						<h:inputText  class="error atsInput" id="phone" maxlength="40" name="phone" onblur="formatPhone(this);" onkeydown="formatPhoneOnEnter(this, event);" size="20" type="text" value="#{userProfile.phone}" required="true" requiredMessage="#{label.requiredMessage}"/>
+						<div class="errorMsg"><h:message for="phone" /></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft">
+					<label for="mobile">#{label.mobile}</label>
+				</td>
+				<td class="atsFormTdRight">
+					<h:inputText  class="atsInput" id="mobile" maxlength="40" name="mobile" onblur="formatPhone(this);" onkeydown="formatPhoneOnEnter(this, event);" size="20" type="text" value="#{userProfile.mobile}" />
+					<div class="errorMsg"><h:message for="mobile" /></div>
+				</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft">
+					<label for="street">#{label.street}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight">
+					<div class="requiredInput">
+						<div class="requiredBlock"></div>
+						<h:inputTextarea  class="error atsInput" id="street" maxlength="255" name="street" onchange="handleTextAreaElementChangeWithByteCheck('street', 255, 765, 'remaining', 'over limit');" onclick="handleTextAreaElementChangeWithByteCheck('street', 255, 765, 'remaining', 'over limit');" onkeydown="handleTextAreaElementChangeWithByteCheck('street', 255, 765, 'remaining', 'over limit');" onkeyup="handleTextAreaElementChangeWithByteCheck('street', 255, 765, 'remaining', 'over limit');" onmousedown="handleTextAreaElementChangeWithByteCheck('street', 255, 765, 'remaining', 'over limit');" type="text" wrap="soft"  value="#{userProfile.street}" required="true" requiredMessage="#{label.requiredMessage}"/>
+						<div class="errorMsg"><h:message for="street" /></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft">
+					<label for="city">#{label.city}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight">
+					<div class="requiredInput">
+						<div class="requiredBlock"></div>
+						<h:inputText  class="error atsInput" id="city" maxlength="40" name="city" size="20" type="text" value="#{userProfile.city}" required="true" requiredMessage="#{label.requiredMessage}"/>
+						<div class="errorMsg"><h:message for="city" /></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td class="atsFormTdLeft">
+					<label for="countrySelectList">#{label.country}</label><span class="atsRequired">*</span>
+				</td>
+				<td class="atsFormTdRight">
+				<h:selectOneMenu id="countrySelectList" name="countrySelectList" class="atsSelect" onchange="renderStateProvince();" value="#{userProfile.countrySelect}" required="true" requiredMessage="#{label.requiredMessage}">	
+					<f:selectItem itemValue="" itemLabel="#{label.none}" />
+					<f:selectItems value="#{userProfile.countriesMap}" />
+				</h:selectOneMenu>
+				<div class="errorMsg"><h:message for="countrySelectList" /></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="atsFormTdLeft">
+				<label id="stateProvinceLabel" for="stateProvinceInputField">#{label.stateProvice}</label>
+				<label id="stateSelectListLabel" for="stateSelectList">#{label.stateProvice}</label>
+				<label id="provinceSelectListLabel" for="provinceSelectList">#{label.stateProvice}</label>
+				<span id="stateProvinceRequired" class="atsRequired">*</span>
+			</td>
+			<td class="atsFormTdRight"><span id="stateProvinceSelectList" style="display: none;"></span>
+				<div>
+					<h:selectOneMenu id="stateSelectList" name="stateSelectList" class="atsSelect" value="#{userProfile.stateSelect}"  required="#{userProfile.requiredStateSelectList}" requiredMessage="#{label.requiredMessage}">	
+						<f:selectItem itemValue="" itemLabel="#{label.none}" />
+						<f:selectItems value="#{userProfile.statesMap}" />
+					</h:selectOneMenu>
+					<div class="errorMsg"><h:message for="stateSelectList" /></div>
+				</div>
+				<div>
+					<h:selectOneMenu id="provinceSelectList" name="provinceSelectList" class="atsSelect" value="#{userProfile.provinceSelect}"  required="#{userProfile.requiredProvinceSelectList}" requiredMessage="#{label.requiredMessage}">	
+						<f:selectItem itemValue="" itemLabel="#{label.none}" />
+						<f:selectItems value="#{userProfile.provincesMap}" />
+					</h:selectOneMenu>
+					<div class="errorMsg"><h:message for="provinceSelectList" /></div>
+				</div>
+				<h:inputText  class="atsInput" id="stateProvinceInputField" maxlength="80" name="stateProvinceInputField" size="20" type="text" value="#{userProfile.stateProvinceInputField}" />
+			</td>
+		</tr>
+		<tr>
+			<td class="atsFormTdLeft">
+				<label for="postalCode">#{label.postalCode}</label><span class="atsRequired">*</span>
+			</td>
+			<td class="atsFormTdRight">
+				<div class="requiredInput">
+					<div class="requiredBlock"></div>
+					<h:inputText  class="error atsInput" id="postalCode" maxlength="20" name="postalCode" size="20" type="text" value="#{userProfile.postalCode}" required="true" requiredMessage="#{label.requiredMessage}"/>
+					<div class="errorMsg"><h:message for="postalCode" /></div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="atsFormTdLeft">
+				<label for="contactMethod">#{label.contactMethod}</label><span class="atsRequired">*</span>
+			</td>
+			<td class="atsFormTdRight">
+				<div class="requiredInput">
+					<div class="requiredBlock"></div>
+					<h:selectOneMenu  class="atsSelect" id="contactMethod" name="contactMethod" value="#{userProfile.contactMethod}" required="true" requiredMessage="#{label.requiredMessage}">
+						<f:selectItem itemValue="" itemLabel="#{label.none}" />
+						<f:selectItems value="#{userProfile.contactMethodMap}" />
+					</h:selectOneMenu>
+					<div class="errorMsg"><h:message for="contactMethod" /></div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td class="atsFormTdLeft">
+				<label for="candidateSource">#{label.candidateSource}</label><span class="atsRequired">*</span>
+			</td>
+			<td class="atsFormTdRight">
+				<h:selectOneMenu id="candidateSource" name="candidateSource" class="atsSelect" value="#{userProfile.candidateSource}" required="true" requiredMessage="#{label.requiredMessage}">
+					<f:selectItem itemValue="" itemLabel="#{label.none}" />
+					<f:selectItems value="#{userProfile.candidateSourceMap}" />
+				</h:selectOneMenu>
+				<div class="errorMsg"><h:message for="candidateSource" /></div>
+			</td>
+		</tr>
+		<tr>
+			<td class="atsFormTdLeft"></td>
+			<td class="atsFormTdRight">
+				<h:commandButton action="#{register.initRegistration()}" value="#{label.continueRegistration}" class="atsButton"/>
+			</td>
+		</tr>
+	</table>
+</h:form>
+
+</ui:define>
+
+<ui:define name="endScript">
+	
+	<script>	
+		var myJQuery = jQuery.noConflict();
+		myJQuery("#infoIcon").bind("mousemove", function(event) {
+			myJQuery("#mouseOverInfoOuter").css({		        
+				top:  myJQuery("#infoIcon").position().top + myJQuery("#infoIcon").height() + 5 + "px",
+		        left: myJQuery("#infoIcon").position().left + myJQuery("#infoIcon").width() + 5 + "px"
+		    }).show();
+		}).bind("mouseout", function() {
+			myJQuery("#mouseOverInfoOuter").hide();
+		});		
+	</script>
+	<script type="text/javascript">
+	/* <![CDATA[ */
+		 function searchInDOM(nm) {
+		  var name = nm;
+		  for (j = 0; j < document.forms.length; j++) {
+		   if (document.forms[j].name==undefined || document.forms[j].name=='') continue;
+		   var div = document.getElementById(document.forms[j].name);
+		   if (div == null) continue;
+		   var elems = div.getElementsByTagName('*');
+		   for (var i=0; i<elems.length; i++) {
+		    if (elems[i].id == name) {
+		     return elems[i].id;
+		    }
+		   }
+		  }
+		  return '';
+		 }
+		
+		 function show(el) {
+		  if (el!='') document.getElementById(el).style.display="inline";
+		 }
+		 function hide(el) {
+		  if (el!='') document.getElementById(el).style.display="none";
+		 }
+		 function val(el) {
+		  if (el!='') return document.getElementById(el).value;
+		  return '';
+		 }
+		 function renderStateProvince(AddValidate) {
+		  hide(searchInDOM('stateProvinceLabel'));
+		  hide(searchInDOM('stateSelectListLabel'));
+		  hide(searchInDOM('provinceSelectListLabel'));
+		  hide(searchInDOM('stateProvinceRequired'));
+		  hide(searchInDOM('atsForm:stateSelectList'));
+		  hide(searchInDOM('atsForm:provinceSelectList'));
+		  hide(searchInDOM('atsForm:stateProvinceInputField'));
+		
+		  if (val(searchInDOM('atsForm:countrySelectList')) == 'US') {
+		   show(searchInDOM('stateSelectListLabel'));
+		   show(searchInDOM('stateProvinceRequired'));
+		   show(searchInDOM('atsForm:stateSelectList'));
+		  }
+		  else if (val(searchInDOM('atsForm:countrySelectList')) == 'CA') {
+		   show(searchInDOM('provinceSelectListLabel'));
+		   show(searchInDOM('stateProvinceRequired'));
+		   show(searchInDOM('atsForm:provinceSelectList'));
+		  }
+		  else {
+		   show(searchInDOM('stateProvinceLabel'));
+		   show(searchInDOM('atsForm:stateProvinceInputField'));
+		   if (AddValidate == 'USA/Canada') {
+		    show(searchInDOM('stateProvinceRequired'));
+		   }
+		  }
+		 }
+		
+		 function warn() {
+		  var loginEnabled = true;
+		  if (loginEnabled) {
+		   alert('Please take into account that when you save your username will be updated');
+		  }
+		 }
+		
+		 renderStateProvince('Global');
+		 /* ]]> */
+	</script>
+</ui:define>
+
+</ui:composition>
+
+
+</h:body>
+</BODY>
+</html>

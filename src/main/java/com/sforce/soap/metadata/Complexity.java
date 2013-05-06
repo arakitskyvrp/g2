@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum Complexity {    /**   * Enumeration  : NoRestriction   */   NoRestriction,    /**   * Enumeration  : AlphaNumeric   */   AlphaNumeric,    /**   * Enumeration  : SpecialCharacters   */   SpecialCharacters,  }

@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ReportChartSize {    /**   * Enumeration  : Tiny   */   Tiny,    /**   * Enumeration  : Small   */   Small,    /**   * Enumeration  : Medium   */   Medium,    /**   * Enumeration  : Large   */   Large,    /**   * Enumeration  : Huge   */   Huge,  }

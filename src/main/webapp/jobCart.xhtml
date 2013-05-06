@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<BODY>
+
+	<h:body>
+		<ui:composition template="#{pageController.template}">
+			<ui:define name="body">
+				<!-- 	loginCT.login() -->
+				<h:form>
+					<p:fieldset legend="Jobs In Cart">
+						<h:outputText value="No Jobs In Cart"
+							rendered="#{!cartController.haveJobsInCart}" />
+						<p:dataTable id="jobsInCartTable" var="jobOrder"
+							value="#{cartController.jobsFromCart}"
+							rendered="#{cartController.haveJobsInCart}">
+							<p:column headerText="Action">
+								<p:commandButton value="Remove from Cart" 
+									actionListener="#{cartController.removeJobToCartAndRefresh(jobOrder)}"
+									update="jobsInCartTable" />
+							</p:column>
+							<p:column headerText="Job Title">
+								<p:commandLink
+									rendered="#{jobOrder.ts2__Status__c.equals('Open')}"
+									id="lnkItemUpdate" value="#{jobOrder.name}"
+									actionListener="#{jorderDetail.setJobOrder(jobOrder)}" />
+								<h:outputText value="#{jobOrder.name}"
+									rendered="#{!jobOrder.ts2__Status__c.equals('Open')}" />
+							</p:column>
+							<p:column headerText="Status">
+								<h:outputText value="#{jobOrder.ts2__Status__c}" />
+							</p:column>
+						</p:dataTable>
+					</p:fieldset>
+				</h:form>
+
+			</ui:define>
+		</ui:composition>
+
+
+	</h:body>
+</BODY>
+
+</html>

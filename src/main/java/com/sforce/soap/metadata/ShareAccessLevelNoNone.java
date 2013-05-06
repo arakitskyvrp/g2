@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ShareAccessLevelNoNone {    /**   * Enumeration  : Read   */   Read,    /**   * Enumeration  : Edit   */   Edit,    /**   * Enumeration  : All   */   All,  }

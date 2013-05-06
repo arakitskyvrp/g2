@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<BODY>
+
+	<h:body>
+		<ui:composition template="#{pageController.template}">
+			<ui:define name="body">
+				<!-- 				BEGIN SAVED SEARCH AGENTS -->
+				<h:form id="form">
+
+					<p:dataTable id="searchAgentsTable" var="searchAgent"
+						value="#{searchAgentController.searchAgentsModel}"
+						rowKey="#{searchAgent.searchAgent_Name}"
+						selection="#{searchAgentController.selectedSearchAgent}"
+						selectionMode="single">
+						<p:ajax event="rowSelect"
+							update=":sFrormId:searchCriteriaTable :sFrormId:keyWordsTable :editAgentTestId" />
+						<f:facet name="header">  
+           				 Search Agents  
+        				</f:facet>
+						<p:column headerText="Name">  
+            			#{searchAgent.searchAgent_Name}  
+        				</p:column>
+						<p:column headerText="Number Of Jobs Found">  
+            			#{searchAgentController.getNumberOfJobsFromAgent(searchAgent)}  
+        				</p:column>
+						<p:column headerText="Action">
+							<p:commandButton value="Delete"
+								actionListener="#{searchAgentController.delete(searchAgent)}"
+								update="searchAgentsTable :sFrormId:spanelID" />
+						</p:column>
+					</p:dataTable>
+				</h:form>
+				<!-- 				END SAVED SEARCH AGENTS -->
+				<!-- BEGIN SEARCH BOX -->
+				<!-- 				rendered="#{searchAgentController.selectedSearchAgent != null}" -->
+				<div id="atsFormTdTitle">
+					<h:outputText id="editAgentTestId" rendered="#{searchAgentController.selectedSearchAgent != null}"
+						value="Preview Agent - #{searchAgentController.selectedSearchAgent.searchAgent_Name}" />
+				</div>
+				<h:panelGrid id="mPanelId" layout="none"
+					rendered="#{searchAgentController.selectedSearchAgent != null}">
+					<h:form id="sFrormId">
+						<h:panelGrid id="spanelID">
+							<p:dataTable id="searchCriteriaTable" styleClass="atsSearchTable"
+								cellspacing="0"
+								value="#{searchAgentController.searchCriteriaList}"
+								var="searchCriteria">
+								<!-- 							<f:facet name="header">   -->
+								<!--            				 		Edit '#{searchAgentController.selectedSearchAgent.searchAgent_Name}'   -->
+								<!--         					</f:facet> -->
+								<p:column styleClass="atsSearchTdLeft" headerText="Criteria">
+									<h:outputLabel value="#{searchCriteria.label}:"
+										for="searchCtrl" />
+								</p:column>
+								<p:column styleClass="atsSearchTdRight" headerText="Selected Value">
+<!-- 									<p:selectOneMenu id="searchCtrle" styleClass="atsSelect" -->
+<!-- 										value="#{searchCriteria.selectedValue}" size="1"> -->
+<!-- 										<f:selectItems value="#{searchCriteria.possibleValues}" /> -->
+<!-- 									</p:selectOneMenu> -->
+									<h:outputText id ="searchCtrle" value="#{searchCriteria.selectedValue}" />
+								</p:column>
+							</p:dataTable>
+						</h:panelGrid>
+						<h:panelGrid
+							renered="#{jobSearch.JBSetup.ts2__SearchByKeyword__c}">
+<!-- 							<h:outputLabel value="Search by Keyword" for="searchCtrl" /> -->
+							<p:dataTable id="keyWordsTable"
+								value="#{searchAgentController.keywords}" var="keyword">
+								<p:column styleClass="atsSearchTdLeft" headerText="Keyword">
+<!-- 									<h:inputText value="#{keyword.keyword}" /> -->
+										<h:outputText value="#{keyword.keyword}" />
+								</p:column>
+								<p:column styleClass="atsSearchTdRight" headerText="Operator">
+<!-- 									<p:selectOneMenu id="searchCtrl" styleClass="atsSelect" -->
+<!-- 										value="#{keyword.operator}" size="1"> -->
+<!-- 										<f:selectItems value="#{keyword.possibleOperators}" /> -->
+<!-- 									</p:selectOneMenu> -->
+									<h:outputText value="#{keyword.operator}" />
+								</p:column>
+							</p:dataTable>
+							<p:commandButton id="ajax" value="Add" update="keyWordsTable"
+								process="@this" action="#{jobSearch.addKeyWord}"
+								rendered="false" />
+						</h:panelGrid>
+						<p:commandButton value="Edit" process="@this" ajax="false"
+							actionListener="#{searchAgentController.search}" />
+					</h:form>
+				</h:panelGrid>
+				<!-- END SEARCH BOX -->
+
+			</ui:define>
+		</ui:composition>
+
+
+	</h:body>
+</BODY>
+
+</html>

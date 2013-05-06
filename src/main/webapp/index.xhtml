@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<BODY>
+
+	<h:body>
+		<ui:composition template="#{pageController.template}">
+			<ui:define name="body">
+
+				<div id="atsSearchBox">
+					<div id="atsSearchTitle">
+						<h:outputText value="#{label.searchOpenings}"
+							rendered="#{!jobSearch.editAgent}" />
+						<h:outputText
+							value="#{label.searchOpenings} Search Agent - #{jobSearch.searchAgentName}"
+							rendered="#{jobSearch.editAgent}" />
+					</div>
+					<h:panelGrid rendered="#{!jobSearch.hasPostedJobs}" layout="none">
+						<div id="atsNoJobsMessage">
+							<h:outputText value="No Open Jobs" />
+						</div>
+					</h:panelGrid>
+
+
+					<!-- BEGIN SEARCH BOX -->
+					<h:panelGrid rendered="#{jobSearch.hasPostedJobs}" layout="none">
+						<h:form>
+							<h:panelGrid>
+								<p:dataTable id="searchCriteriaTable"
+									styleClass="atsSearchTable" cellspacing="0"
+									value="#{jobSearch.searchCriteriaList}" var="searchCriteria">
+									<p:column styleClass="atsSearchTdLeft">
+										<h:outputLabel value="#{searchCriteria.label}:"
+											for="searchCtrl" />
+									</p:column>
+									<p:column styleClass="atsSearchTdRight">
+										<p:selectOneMenu id="searchCtrle" styleClass="atsSelect"
+											value="#{searchCriteria.selectedValue}" size="1">
+											<f:selectItems value="#{searchCriteria.possibleValues}" />
+										</p:selectOneMenu>
+									</p:column>
+								</p:dataTable>
+							</h:panelGrid>
+							<h:panelGrid
+								renered="#{jobSearch.JBSetup.ts2__SearchByKeyword__c}">
+								<h:outputLabel value="#{label.searchByKeyword}" for="searchCtrl" />
+								<p:dataTable id="keyWordsTable" value="#{jobSearch.keywords}"
+									var="keyword">
+									<p:column styleClass="atsSearchTdLeft">
+										<h:inputText value="#{keyword.keyword}" />
+									</p:column>
+									<p:column styleClass="atsSearchTdRight">
+										<p:selectOneMenu id="searchCtrl" styleClass="atsSelect"
+											value="#{keyword.operator}" size="1">
+											<f:selectItems value="#{keyword.possibleOperators}" />
+										</p:selectOneMenu>
+									</p:column>
+									<p:column>
+										<p:commandButton id="removeKeywordButton" value="X"
+											ajax="false" update="keyWordsTable" process="@this"
+											action="#{jobSearch.removeKeyword(keyword)}" />
+									</p:column>
+								</p:dataTable>
+								<p:commandButton id="ajax" value="Add" ajax="false"
+									update="keyWordsTable" process="@this"
+									action="#{jobSearch.addKeyWord}"
+									rendered="#{!jobSearch.keywordsLimit}" />
+							</h:panelGrid>
+							<p:commandButton value="#{label.search}" process="@this"
+								ajax="false" actionListener="#{jobSearch.search}" />
+							<p:commandButton value="Reset Search" process="@this"
+								ajax="false" actionListener="#{jobSearch.resetSearch}"
+								rendered="#{!jobSearch.isSearchIdle}" />
+						</h:form>
+					</h:panelGrid>
+					<!-- END SEARCH BOX -->
+
+					<!-- 								Save As Search Agent Start -->
+					<h:form>
+						<p:commandButton rendered="#{jobSearch.editAgent}"
+							id="updateSearchAgentButton" value="Save"
+							action="#{searchAgentController.updateSearchAgent(jobSearch.searchAgent)}"></p:commandButton>
+						<p:commandButton rendered="#{jobSearch.editAgent}"
+							id="cancelUpdateButton" value="Cancel"
+							action="#{jobSearch.cancelUpdate}"></p:commandButton>
+					</h:form>
+					<p:commandButton
+						rendered="#{jobSearch.isUserLoggedIn and !jobSearch.editAgent}"
+						id="showDialogButton" value="Save As Search Agent"
+						onclick="saveAgent.show()" type="button" />
+					<p:confirmDialog id="saveAgentDialog" message="Search Agent Name:"
+						header="#{label.saveAsAgent}" severity="info"
+						widgetVar="saveAgent" appendToBody="true">
+						<h:form>
+							<p:inputText value="#{jobSearch.searchAgentName}" maxlength="20">
+								<p:ajax />
+							</p:inputText>
+							<p:commandButton id="confirm" immediate="true" value="Save"
+								oncomplete="saveAgent.hide()"
+								actionListener="#{searchAgentController.saveAsSearchAgent}"
+								process="@this" ajax="false" />
+							<p:commandButton id="decline" value="Cancel"
+								onclick="saveAgent.hide()" type="button" />
+						</h:form>
+					</p:confirmDialog>
+					<!-- 								Save As Search Agent End -->
+
+					<!-- BEGIN SEARCH RESULTS -->
+					<h:form id="searchForm">
+						<h:panelGrid rendered="#{!jobSearch.filteredJobOrders.isEmpty()}"
+							layout="none">
+							<div id="atsSearchResultsBox">
+								<div id="atsSearchResultsTitle">#{label.searchResults}</div>
+								<h:panelGrid
+									rendered="#{jobSearch.availableJobOrders.isEmpty()}"
+									layout="none">
+									<div id="atsNoResultsMessage">
+										<h:outputLabel value="No Results" />
+									</div>
+								</h:panelGrid>
+								<h:panelGrid
+									rendered="#{!jobSearch.filteredJobOrders.isEmpty()}"
+									layout="none">
+									<div id="atsSearchResultsText">
+										<h:outputLabel
+											value="#{jobSearch.availableJobOrders.size()} #{label.jobsFound}" />
+									</div>
+								</h:panelGrid>
+							</div>
+							<h:panelGrid class="atsSearchResultsTable">
+								<p:dataTable styleClass="atsSearchResultsTable" id="resultTable"
+									var="jobOrder" value="#{jobSearch.availableJobOrders}"
+									paginator="true" rows="10" rowsPerPageTemplate="5,10,15">
+									<p:columns value="#{jobSearch.columns}" var="column"
+										columnIndexVar="colIndex"
+										sortBy="#{jobOrder[column.property]}">
+										<f:facet name="header">  
+               				 		#{column.header}  
+           				 			</f:facet>
+										<h:outputText
+											rendered="#{jobSearch.resultTableCellType(column.property,'text')}"
+											value="#{jobOrder[column.property]}"></h:outputText>
+										<p:commandLink
+											rendered="#{jobSearch.resultTableCellType(column.property, 'link')}"
+											id="lnkItemUpdate" value="#{jobOrder[column.property]}"
+											actionListener="#{jorderDetail.setJobOrder(jobOrder)}" />
+									</p:columns>
+									<p:column rendered="#{jobSearch.isUserLoggedIn}">
+										<f:facet name="header">
+											<h:outputText value="Cart Action" />
+										</f:facet>
+										<p:commandButton id="addToCart" value="Add To Cart"
+											process="@this"
+											rendered="#{!cartController.containsJobInCart(jobOrder)}"
+											actionListener="#{cartController.addJobToCart(jobOrder)}"
+											update="resultTable" />
+										<p:commandButton value="Remove from Cart" process="@this"
+											rendered="#{cartController.containsJobInCart(jobOrder)}"
+											actionListener="#{cartController.removeJobToCart(jobOrder)}"
+											update="resultTable" />
+									</p:column>
+								</p:dataTable>
+							</h:panelGrid>
+						</h:panelGrid>
+					</h:form>
+					<!-- END SEARCH RESULTS -->
+				</div>
+			</ui:define>
+		</ui:composition>
+
+
+	</h:body>
+</BODY>
+
+</html>

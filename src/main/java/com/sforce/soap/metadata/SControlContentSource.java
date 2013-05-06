@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum SControlContentSource {    /**   * Enumeration  : HTML   */   HTML,    /**   * Enumeration  : URL   */   URL,    /**   * Enumeration  : Snippet   */   Snippet,  }

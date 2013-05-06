@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum WorkflowTimeUnits {    /**   * Enumeration  : Hours   */   Hours,    /**   * Enumeration  : Days   */   Days,  }

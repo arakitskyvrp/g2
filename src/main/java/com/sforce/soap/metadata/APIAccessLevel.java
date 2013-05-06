@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum APIAccessLevel {    /**   * Enumeration  : Unrestricted   */   Unrestricted,    /**   * Enumeration  : Restricted   */   Restricted,  }

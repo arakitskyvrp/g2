@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum MinPasswordLength {    /**   * Enumeration  : FiveCharacters   */   FiveCharacters,    /**   * Enumeration  : EightCharacters   */   EightCharacters,    /**   * Enumeration  : TenCharacters   */   TenCharacters,  }

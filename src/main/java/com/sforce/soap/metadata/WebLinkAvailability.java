@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum WebLinkAvailability {    /**   * Enumeration  : online   */   online,    /**   * Enumeration  : offline   */   offline,  }

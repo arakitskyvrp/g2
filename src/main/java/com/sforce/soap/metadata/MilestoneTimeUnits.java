@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum MilestoneTimeUnits {    /**   * Enumeration  : Minutes   */   Minutes,    /**   * Enumeration  : Hours   */   Hours,    /**   * Enumeration  : Days   */   Days,  }

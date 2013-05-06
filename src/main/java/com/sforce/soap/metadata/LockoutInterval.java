@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum LockoutInterval {    /**   * Enumeration  : FifteenMinutes   */   FifteenMinutes,    /**   * Enumeration  : ThirtyMinutes   */   ThirtyMinutes,    /**   * Enumeration  : SixtyMinutes   */   SixtyMinutes,    /**   * Enumeration  : Forever   */   Forever,  }

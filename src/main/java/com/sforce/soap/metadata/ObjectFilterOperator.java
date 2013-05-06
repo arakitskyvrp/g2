@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ObjectFilterOperator {    /**   * Enumeration  : with   */   with,    /**   * Enumeration  : without   */   without,  }

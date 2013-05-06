@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum UiBehavior {    /**   * Enumeration  : Edit   */   Edit,    /**   * Enumeration  : Required   */   Required,    /**   * Enumeration  : Readonly   */   Readonly,  }

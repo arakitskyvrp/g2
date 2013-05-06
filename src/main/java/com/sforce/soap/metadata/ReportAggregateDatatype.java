@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ReportAggregateDatatype {    /**   * Enumeration  : currency   */   currency,    /**   * Enumeration  : percent   */   percent,    /**   * Enumeration  : number   */   number,  }

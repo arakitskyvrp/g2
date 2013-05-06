@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title><ui:insert name="title">Welcome to our Career Site</ui:insert></title>
+
+	<script type="text/javascript">
+		var dateObject = new Date();
+	</script>
+
+	<!-- CSS - Setup -->
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputStylesheet library="css" name="base.css" />
+	<h:outputStylesheet library="css" name="grid.css" />
+
+	<!-- CSS - CURENT Background theme -->
+	<h:outputStylesheet library="css" name="/themes/light.css" />
+
+	<!-- CSS - CURRENT Color Scheme -->
+	<h:outputStylesheet library="css" name="/themes/blue.css" />
+
+	<!-- CSS - Job Board -->
+	<h:outputStylesheet library="css" name="calendar.css" />
+	<h:outputStylesheet library="css" name="jobboard.css" />
+	<h:outputScript library="js" name="modernizr-1.5.min.js" />
+	<h:outputScript library="js" name="jquery-1.4.2.min.js" />
+	<h:outputScript library="js" name="cufon.js" />
+	<h:outputScript library="js" name="Aller.font.js" />
+
+	<script type="text/javascript">
+		$.noConflict();
+		jQuery(document)
+				.ready(
+						function(jQuery) {
+							//Cufon Setup
+							Cufon
+									.replace('#atsSearchTitle, #atsSearchResultsTitle, .atsFormTdTitle, .topPanelContainer .title, .atsDisplayTdTitle');
+						});
+	</script>
+	<!--   #fb{background:url(../images/layout/social-sp.png?1355464156) no-repeat 0 -52px}#gp{background:url(../images/layout/social-sp.png?1355464156) no-repeat 0 -104px} -->
+	<h:form id="languagesForm">
+		<table>
+			<tr>
+				<h:outputText value="Language:" />
+			</tr>
+			<tr>
+				<p:selectOneMenu converter="languageConverter"
+					id="availableLanguages" value="#{label.selectedLanguage}">
+					<f:selectItems value="#{label.availableLanguages}"/>
+					<p:ajax execute="@this" render="@all"/>
+				</p:selectOneMenu>
+			</tr>
+		</table>
+	</h:form>
+</h:head>
+
+
+
+<h:body>
+
+	<div id="wrapper">
+		<!-- Start Header -->
+		<ui:insert name="header">
+			<!-- Logo -->
+			<h1 id="logo">
+				<a href="#"> <!-- Change img src --> <!--                 <img src="" alt="logo" title="logo"/> -->
+				</a>
+			</h1>
+			<!-- nav -->
+			<br class="cl" />
+		</ui:insert>
+
+		<!-- Page Container -->
+		<div id="page">
+			<!-- Page Title -->
+			<h2 class="ribbon blue full">Careers</h2>
+			<div class="triangle-ribbon blue">
+				
+			</div>
+			<br class="cl" />
+			<!-- Page Content -->
+	        <div class="two-col container_12" id="page-content">
+	        	<h:panelGroup rendered="#{menu.isUserLoggedIn}">
+					<div id="js-loggedin-legend">
+						<h:outputText value="Logged in as: #{menu.loggedInUserName}" />
+					</div>
+				</h:panelGroup>
+ 	           <div class="grid_12">
+					<ui:insert name="content">
+							<ui:insert name="body" />
+					</ui:insert>
+    	        </div>
+    	        <br class="cl" />
+        	</div>
+        
+			<!-- Page Sidebar -->
+			<aside>
+				<div class="sidebar-nav">
+					<ul class="careers-link">
+						<li class="first current"><a href="#">Careers</a></li>
+					</ul>
+					<!--                 <ts2:Menu ></ts2:Menu> -->
+					<div id="js-menu-container">
+						<ul id="js-menu" class="careers-link">
+							<li id="js-menu-search">
+								<h:outputLink 
+										value="/index.xhtml">
+										<h:outputText value="#{label.returnToJobSearch}" />
+									</h:outputLink>
+							</li>
+							<h:panelGroup rendered="#{!menu.isUserLoggedIn}" layout="none">
+								<li id="js-menu-login"><h:outputLink rendered="#{!menu.isUserLoggedIn}"
+										value="/login.xhtml">
+										<h:outputText value="#{label.login}" />
+									</h:outputLink></li>
+								<li id="js-menu-register"><h:outputLink rendered="#{!menu.isUserLoggedIn}"
+										value="/register.xhtml">
+										<h:outputText value="#{label.register}" />
+									</h:outputLink></li>
+							</h:panelGroup>
+							<h:panelGroup rendered="#{menu.isUserLoggedIn}" layout="none">
+								<li id="js-menu-apps">
+									<h:outputLink value="/jobApplications.xhtml" rendered="#{menu.isUserLoggedIn}">
+										<h:outputText value="#{label.seeYourJobApplications}"/>
+									</h:outputLink>
+								</li>
+								<li id="js-menu-refs">
+									<h:outputLink value="/jobReferrals.xhtml" rendered="#{menu.isUserLoggedIn}">
+										<h:outputText value="#{label.seeYourReferrals}"/>
+									</h:outputLink>
+								</li>
+								<li id="js-menu-refs">
+									<h:outputLink value="/searchAgent.xhtml" rendered="#{menu.isUserLoggedIn}">
+										<h:outputText value="#{label.yourJobSearchAgents}"/>
+									</h:outputLink>
+								</li>
+								<li id="js-menu-refs">
+									<h:outputLink value="/jobCart.xhtml" rendered="#{menu.isUserLoggedIn}">
+										<h:outputText value="Job Cart"/>
+									</h:outputLink>
+								</li>
+								<li id="js-menu-updateinfo">
+									<h:outputLink value="/updateProfile.xhtml" rendered="#{menu.isUserLoggedIn}">
+										<h:outputText value="#{label.updateYourInfo}"/>
+									</h:outputLink>
+								</li>
+								<li id="js-menu-resume">
+									<h:outputLink value="/resume.xhtml" rendered="#{menu.isUserLoggedIn}">
+										<h:outputText value="#{label.updateYourResume}"/>
+									</h:outputLink>
+								</li>
+								<li id="js-menu-logout">
+                    				<h:outputLink value="/logout.xhtml" rendered="#{menu.isUserLoggedIn}">
+                        				<h:outputText value="Log Out" />
+                    				</h:outputLink>
+                				</li>
+                			</h:panelGroup>
+						</ul>
+					</div>
+				</div>
+			</aside>
+			<br class="cl" />
+		</div>
+
+		<!-- Footer Start -->
+		<ui:insert name="footer">
+			<p>
+				Copyright ©
+				<script type="text/javascript">
+					document.write(dateObject.getFullYear());
+				</script>
+				| Powered by <a href="http://www.jobscience.com/recruiting"
+					target="_blank">Jobscience Recruiting</a>
+			</p>
+			<br class="cl" />
+		</ui:insert>
+	</div>
+
+</h:body>
+<ui:insert name="endScript" />
+</html>

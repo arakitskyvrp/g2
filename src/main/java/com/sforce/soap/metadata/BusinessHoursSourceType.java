@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum BusinessHoursSourceType {    /**   * Enumeration  : None   */   None,    /**   * Enumeration  : Case   */   Case,    /**   * Enumeration  : Static   */   Static,  }

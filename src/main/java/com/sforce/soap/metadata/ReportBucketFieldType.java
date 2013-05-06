@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ReportBucketFieldType {    /**   * Enumeration  : text   */   text,    /**   * Enumeration  : number   */   number,    /**   * Enumeration  : picklist   */   picklist,  }

@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum FlowAssignmentOperator {    /**   * Enumeration  : Assign   */   Assign,    /**   * Enumeration  : Add   */   Add,    /**   * Enumeration  : Subtract   */   Subtract,  }

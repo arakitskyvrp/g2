@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ForecastCategories {    /**   * Enumeration  : Omitted   */   Omitted,    /**   * Enumeration  : Pipeline   */   Pipeline,    /**   * Enumeration  : BestCase   */   BestCase,    /**   * Enumeration  : Forecast   */   Forecast,    /**   * Enumeration  : Closed   */   Closed,  }

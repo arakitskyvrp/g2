@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum DashboardType {    /**   * Enumeration  : SpecifiedUser   */   SpecifiedUser,    /**   * Enumeration  : LoggedInUser   */   LoggedInUser,    /**   * Enumeration  : MyTeamUser   */   MyTeamUser,  }

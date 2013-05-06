@@ -1,0 +1,74 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<BODY>
+
+	<h:body>
+
+		<ui:composition template="#{pageController.template}">
+			<ui:define name="body">
+			<div id="atsSearchTitle">
+				<h:outputText value="#{questionsController.questionTypeLabel}" />
+			</div>
+<!-- 			<table> -->
+<!-- 				<tr> -->
+<!-- 					<td class="atsDisplayTdTitle" colSpan="3">#{questionsController.questionTypeLabel}</td> -->
+<!-- 				</tr> -->
+<!-- 				</table> -->
+				<h:form>
+					<h:dataTable id="questionsTable"
+						value="#{questionsController.questionModel}" var="model"
+						cellspacing="3">
+						<h:column>
+							<h:outputText rendered="#{model.layout == 'LEFT'}"
+								value="#{model.questionString}" escape="false" />
+						</h:column>
+						<h:column>
+							<h:outputText rendered="#{model.layout == 'ABOVE'}"
+								value="#{model.questionString}" escape="false" />
+							<p:selectOneMenu rendered="#{!model.textAnswerType}"
+								converter="answersConverter" id="possibleAnswersRadio"
+								value="#{model.selectedAnswer}"
+								required="#{!model.textAnswer and model.isRequired}">
+								<f:selectItem itemLabel="--None--" itemValue="" />
+								<f:selectItems value="#{model.possibleAnswers}" />
+							</p:selectOneMenu>
+							<p:inputTextarea rendered="#{model.textAnswerType}" rows="6"
+								cols="33" value="#{model.textAnswer}"
+								required="#{model.textAnswer and model.isRequired}"></p:inputTextarea>
+							<h:outputText rendered="#{model.layout == 'BELOW'}"
+								value="#{model.questionString}" escape="false" />
+						</h:column>
+						<h:column>
+							<h:outputText rendered="#{model.layout == 'RIGHT'}"
+								value="#{model.questionString}" escape="false" />
+						</h:column>
+					</h:dataTable>
+					<table>
+						<tr>
+							<td><p:commandButton
+									rendered="#{workflowController.hasPreviousStep}"
+									value="Back" action="#{workflowController.back}"
+									ajax="false"></p:commandButton></td>
+							<td><p:commandButton
+									rendered="#{workflowController.hasNextStep}"
+									value="Continue"
+									action="#{workflowController.continueApplication}"
+									ajax="false"></p:commandButton> <p:commandButton
+									rendered="#{!workflowController.hasNextStep}" value="Submit"
+									action="#{workflowController.submit}" ajax="false"></p:commandButton></td>
+						</tr>
+					</table>
+				</h:form>
+			</ui:define>
+		</ui:composition>
+
+
+
+	</h:body>
+</BODY>
+</html>

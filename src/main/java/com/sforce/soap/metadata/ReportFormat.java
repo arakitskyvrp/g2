@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ReportFormat {    /**   * Enumeration  : MultiBlock   */   MultiBlock,    /**   * Enumeration  : Matrix   */   Matrix,    /**   * Enumeration  : Summary   */   Summary,    /**   * Enumeration  : Tabular   */   Tabular,  }

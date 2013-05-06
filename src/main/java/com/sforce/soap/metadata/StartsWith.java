@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum StartsWith {    /**   * Enumeration  : Consonant   */   Consonant,    /**   * Enumeration  : Vowel   */   Vowel,    /**   * Enumeration  : Special   */   Special,  }

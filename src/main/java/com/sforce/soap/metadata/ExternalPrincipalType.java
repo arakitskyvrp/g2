@@ -1,0 +1,1 @@
+package com.sforce.soap.metadata;/** * Generated enum, please do not edit. */public enum ExternalPrincipalType {    /**   * Enumeration  : Anonymous   */   Anonymous,    /**   * Enumeration  : PerUser   */   PerUser,    /**   * Enumeration  : NamedUser   */   NamedUser,  }
