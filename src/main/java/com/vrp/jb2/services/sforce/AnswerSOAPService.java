@@ -41,9 +41,9 @@ public class AnswerSOAPService extends BaseSOAPService implements AnswerService 
                 questionID);
     }
 
-    public List<Ts2__Answer__c> getAnswersByID(String answersID) {
+    public Ts2__Answer__c getAnswersByID(String answersID) {
         LOG.trace("Start getAnswersByID(), answersID :: " + answersID);
-        return getListElementsByParam(QUERY_ANSWER_PATTERN, WHERE_BY_ANSWERS_ID_PATTERN, Ts2__Answer__c.class, answersID);
+        return getElementByParam(QUERY_ANSWER_PATTERN, WHERE_BY_ANSWERS_ID_PATTERN, Ts2__Answer__c.class, answersID);
 
     }
 

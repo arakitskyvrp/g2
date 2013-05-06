@@ -25,7 +25,7 @@ public interface AnswerService {
      * @param answersID id of question.
      * @return list of answers.
      */
-    public List<Ts2__Answer__c> getAnswersByID(String answersID);
+    public Ts2__Answer__c getAnswersByID(String answersID);
 
     /**
      * Get answer translation.
