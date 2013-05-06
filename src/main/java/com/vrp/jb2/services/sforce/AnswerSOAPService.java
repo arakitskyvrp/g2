@@ -1,13 +1,11 @@
-package com.sforce.soap.services.impl;
+package com.vrp.jb2.services.sforce;
 
 import com.sforce.soap.enterprise.sobject.Answer_Translation__c;
-import com.sforce.soap.enterprise.sobject.SObject;
 import com.sforce.soap.enterprise.sobject.Ts2__Answer__c;
-import com.sforce.soap.services.AnswerService;
+import com.vrp.jb2.services.AnswerService;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,42 +33,19 @@ public class AnswerSOAPService extends BaseSOAPService implements AnswerService 
 
 
     public List<Ts2__Answer__c> getAnswersForQuestion(String questionID) {
-        return getAnswersById(WHERE_BY_QUESTION_ID_PATTERN, questionID);
+        return getListElementsByParam(QUERY_ANSWER_PATTERN, WHERE_BY_QUESTION_ID_PATTERN, Ts2__Answer__c.class,
+                questionID);
     }
 
-    public List<Ts2__Answer__c> getAnswersByID(String answersID) {
-        return getAnswersById(WHERE_BY_ANSWERS_ID_PATTERN, answersID);
+    public Ts2__Answer__c getAnswersByID(String answersID) {
+        return getElementByParam(QUERY_ANSWER_PATTERN, WHERE_BY_ANSWERS_ID_PATTERN, Ts2__Answer__c.class, answersID);
+
     }
 
     public Answer_Translation__c getAnswerTranslation(String answerID,
                                                       String languageID) {
-        String query = buildSqlQuery(QUERY_ANSWER_TRANSLATION_PATTERN, WHERE_BY_ANSWERS_AND_LANGUAGE_PATTERN, answerID, languageID);
-        SObject[] records = executeQuery(query);
-        if (records != null && records.length > 0) {
-            return (Answer_Translation__c) records[0];
-        }
-        return null;
+        return getElementByParam(QUERY_ANSWER_TRANSLATION_PATTERN, WHERE_BY_ANSWERS_AND_LANGUAGE_PATTERN,
+                Answer_Translation__c.class, answerID, languageID);
     }
-
-    private List<Ts2__Answer__c> getAnswersById(String whereSql, String id) {
-        if (id == null) {
-            return new ArrayList<Ts2__Answer__c>();
-        }
-        List<Ts2__Answer__c> answers = new ArrayList<Ts2__Answer__c>();
-
-        String query = buildSqlQuery(QUERY_ANSWER_PATTERN, whereSql, id);
-
-        SObject[] records = executeQuery(query);
-        if (records != null) {
-            for (SObject sObject : records) {
-                if (sObject instanceof Ts2__Answer__c) {
-                    answers.add((Ts2__Answer__c) sObject);
-                }
-            }
-        }
-        return answers;
-    }
-
-
 
 }

@@ -1,6 +1,5 @@
-package com.sforce.soap.services.impl;
+package com.vrp.jb2.services.sforce;
 
-import com.sforce.ws.ConnectionException;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -9,7 +8,7 @@ import java.text.MessageFormat;
 import static org.testng.Assert.assertEquals;
 
 /**
- * Test class for {@link AnswerSOAPService}
+ * Test class for {@link com.vrp.jb2.services.sforce.AnswerSOAPService}
  */
 public class BaseSOAPServiceTest {
 
