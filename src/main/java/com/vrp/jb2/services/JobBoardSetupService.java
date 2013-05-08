@@ -4,6 +4,8 @@ import com.sforce.soap.enterprise.sobject.Ts2__Job_Board_Setup__c;
 
 /**
  * Interface to obtain data about job board.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 public interface JobBoardSetupService {
 

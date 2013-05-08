@@ -5,18 +5,21 @@ import com.sforce.soap.enterprise.sobject.Ts2__Answer__c;
 import com.vrp.jb2.services.AnswerService;
 import org.apache.log4j.Logger;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
 import java.util.List;
 
 /**
  * Connects to a remote salesforce repository for information about answers.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 @ManagedBean(name = "answerSOAPServiceNew")
-@SessionScoped
-public class AnswerSOAPService extends BaseSOAPService implements AnswerService {
+@ApplicationScoped
+public class AnswerSOAPService implements AnswerService {
 
-     private static final Logger LOG = Logger.getLogger(AnswerSOAPService.class);
+    private static final Logger LOG = Logger.getLogger(AnswerSOAPService.class);
 
     private static final String QUERY_ANSWER_PATTERN = "Select " +
             "Id, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, " +
@@ -34,22 +37,32 @@ public class AnswerSOAPService extends BaseSOAPService implements AnswerService 
     private static final String WHERE_BY_ANSWERS_ID_PATTERN = "WHERE Id = ''{0}''";
     private static final String WHERE_BY_ANSWERS_AND_LANGUAGE_PATTERN = " WHERE Answer__c = '{0}' AND Language__c = '{1}' ";
 
+    @ManagedProperty(value = "#{salesForceManager}")
+    private SalesForceManager sfManager;
+
+    public void setSfManager(SalesForceManager sfManager) {
+        this.sfManager = sfManager;
+    }
+
+    private SalesForceManager getSfManager() {
+        return sfManager;
+    }
 
     public List<Ts2__Answer__c> getAnswersForQuestion(String questionID) {
         LOG.trace("Start getAnswersForQuestion(), questionID :: " + questionID);
-        return getListElementsByParam(QUERY_ANSWER_PATTERN, WHERE_BY_QUESTION_ID_PATTERN, Ts2__Answer__c.class,
+        return getSfManager().getListElementsByParam(QUERY_ANSWER_PATTERN, WHERE_BY_QUESTION_ID_PATTERN, Ts2__Answer__c.class,
                 questionID);
     }
 
     public Ts2__Answer__c getAnswersByID(String answersID) {
         LOG.trace("Start getAnswersByID(), answersID :: " + answersID);
-        return getElementByParam(QUERY_ANSWER_PATTERN, WHERE_BY_ANSWERS_ID_PATTERN, Ts2__Answer__c.class, answersID);
+        return getSfManager().getElementByParam(QUERY_ANSWER_PATTERN, WHERE_BY_ANSWERS_ID_PATTERN, Ts2__Answer__c.class, answersID);
 
     }
 
     public Answer_Translation__c getAnswerTranslation(String answerID, String languageID) {
         LOG.trace("Start getAnswerTranslation(), answerID :: " + answerID + ", languageID :: " + languageID);
-        return getElementByParam(QUERY_ANSWER_TRANSLATION_PATTERN, WHERE_BY_ANSWERS_AND_LANGUAGE_PATTERN,
+        return getSfManager().getElementByParam(QUERY_ANSWER_TRANSLATION_PATTERN, WHERE_BY_ANSWERS_AND_LANGUAGE_PATTERN,
                 Answer_Translation__c.class, answerID, languageID);
     }
 

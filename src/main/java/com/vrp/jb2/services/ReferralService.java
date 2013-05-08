@@ -4,6 +4,8 @@ import com.sforce.soap.enterprise.sobject.Ts2__Referral__c;
 
 /**
  * Service for work with the referral.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 public interface ReferralService {
 

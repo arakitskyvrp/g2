@@ -1,42 +1,47 @@
 package com.vrp.jb2.services;
 
-import com.sforce.soap.enterprise.sobject.*;
+import com.sforce.soap.enterprise.sobject.Questions_Translation__c;
+import com.sforce.soap.enterprise.sobject.Ts2__Job__c;
+import com.sforce.soap.enterprise.sobject.Ts2__Question__c;
+import com.sforce.soap.enterprise.sobject.Ts2__StandardQuestion__c;
 
 import java.util.List;
 
 /**
  * Service is designed to work with the questions.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 public interface QuestionService {
 
     /**
-     * Get standard question by jobBoard.
+     * Get standard question by jobBoard id.
      *
-     * @param jobBoardSetup jobBoard.
+     * @param jobBoardSetupId jobBoard id.
      * @return list of standard question by jobBoard.
      */
-    public List<Ts2__StandardQuestion__c> getStandardQuestions(Ts2__Job_Board_Setup__c jobBoardSetup); //select by  jobBoardSetup.id
+    public List<Ts2__StandardQuestion__c> getStandardQuestions(String jobBoardSetupId); //select by  jobBoardSetup.id
 
     /**
      * Get social question by jobBoard.
      *
-     * @param jobBoardSetup jobBoard.
+     * @param jobBoardSetupId jobBoard.
      * @return list of standard question by jobBoard.
      */
-    public List<Ts2__Question__c> getSocialQuestions(Ts2__Job_Board_Setup__c jobBoardSetup); //select by  jobBoardSetup.id
+    public List<Ts2__Question__c> getSocialQuestions(String jobBoardSetupId); //select by  jobBoardSetup.id
 
     /**
      * Get compliance question by jobBoard.
      *
-     * @param jobBoardSetup jobBoard.
+     * @param jobBoardSetupId jobBoard id.
      * @return list of compliance question by jobBoard.
      */
-    public List<Ts2__Question__c> getComplianceQuestions(Ts2__Job_Board_Setup__c jobBoardSetup); //select by  jobBoardSetup.id
+    public List<Ts2__Question__c> getComplianceQuestions(String jobBoardSetupId); //select by  jobBoardSetup.id
 
     /**
      * Get question by jobOrder.
      *
-     * @param jobOrder jobOrder.
+     * @param jobOrder jobOrder id.
      * @return list of question by jobOrder.
      */
     public List<Ts2__Question__c> getCustomQuestions(Ts2__Job__c jobOrder); //select by  jobOrder.id

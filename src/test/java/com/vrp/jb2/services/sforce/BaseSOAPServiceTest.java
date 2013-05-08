@@ -25,11 +25,11 @@ public class BaseSOAPServiceTest {
     public static final String WHERE_BY_QUESTION_ID_PATTERN = "WHERE ts2__Question__c = ''{0}''";
     public static final String WHERE_BY_ANSWERS_ID_PATTERN = "WHERE Id = ''{0}''";
 
-    private AnswerSOAPService answerService;
+    private SalesForceManager salesForceManager;
 
     @BeforeTest
     public void init(){
-        answerService = new AnswerSOAPService();
+        salesForceManager = new SalesForceManager();
     }
 
     @Test
@@ -38,7 +38,7 @@ public class BaseSOAPServiceTest {
         String query = "Select Id, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, ts2__Question__c, ts2__Answer__c, ts2__Legacy_AnswerID__c, ts2__Order__c, ts2__Score__c, ts2__ts2IsTxt__c FROM ts2__Answer__c"
                 + where + "ORDER BY ts2__Order__c ASC";
 
-        assertEquals(query,answerService.buildSqlQuery(QUERY_PATTERN,WHERE_BY_QUESTION_ID_PATTERN,QUESTION_ID));
+        assertEquals(query, salesForceManager.buildSqlQuery(QUERY_PATTERN, WHERE_BY_QUESTION_ID_PATTERN, QUESTION_ID));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class BaseSOAPServiceTest {
         String query = "Select Id, IsDeleted, Name, CreatedDate, CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, ts2__Question__c, ts2__Answer__c, ts2__Legacy_AnswerID__c, ts2__Order__c, ts2__Score__c, ts2__ts2IsTxt__c FROM ts2__Answer__c"
                 + where + "ORDER BY ts2__Order__c ASC";
 
-        assertEquals(query,answerService.buildSqlQuery(QUERY_PATTERN,WHERE_BY_ANSWERS_ID_PATTERN,QUESTION_ID));
+        assertEquals(query, salesForceManager.buildSqlQuery(QUERY_PATTERN, WHERE_BY_ANSWERS_ID_PATTERN, QUESTION_ID));
     }
 
     @Test

@@ -1,12 +1,13 @@
 package com.vrp.jb2.services;
 
-import com.sforce.soap.enterprise.SaveResult;
 import com.sforce.soap.enterprise.sobject.Ts2__Application__c;
 
 import java.util.List;
 
 /**
  * Interface to obtain data about application.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 public interface ApplicationService {
 
@@ -31,5 +32,5 @@ public interface ApplicationService {
      * @param application the application.
      * @return result of conservation.
      */
-    public SaveResult save(Ts2__Application__c application);
+    public Ts2__Application__c save(Ts2__Application__c application);
 }

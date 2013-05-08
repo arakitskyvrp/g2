@@ -1,25 +1,26 @@
 package com.vrp.jb2.services.sforce;
 
-import com.sforce.soap.enterprise.SaveResult;
-import com.sforce.soap.enterprise.sobject.SObject;
 import com.sforce.soap.enterprise.sobject.Ts2__Application__c;
 import com.vrp.jb2.services.ApplicationService;
 import org.apache.log4j.Logger;
 
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ManagedProperty;
 import java.util.List;
 
 /**
  * Connects to a remote salesforce repository for information about applications.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 @ManagedBean(name = "applicationSOAPServiceNew")
-@SessionScoped
-public class ApplicationSOAPService extends BaseSOAPService implements ApplicationService {
+@ApplicationScoped
+public class ApplicationSOAPService implements ApplicationService {
 
     private static final Logger LOG = Logger.getLogger(ApplicationSOAPService.class);
 
-    public static final String QUERY_APPLICATIONS_PATTERN = "Select Id, IsDeleted, Name, RecordTypeId, CreatedDate, " +
+    private static final String QUERY_APPLICATIONS_PATTERN = "Select Id, IsDeleted, Name, RecordTypeId, CreatedDate, " +
             "CreatedById, LastModifiedDate, LastModifiedById, SystemModstamp, LastActivityDate, " +
             "ts2__Job__c, ts2__AccountContact__c, ts2__Account__c, ts2__Address__c, ts2__Agency__c, " +
             "ts2__App_Status__c, ts2__App_Tags__c, ts2__Application_Source__c, ts2__Application_Status__c, " +
@@ -41,28 +42,38 @@ public class ApplicationSOAPService extends BaseSOAPService implements Applicati
             "ts2extams__Substatus__c FROM ts2__Application__c " +
             "{0}";
 
-    public static final String WHERE_APPLICATIONS_PATTERN = " WHERE ts2__Candidate_Contact__c = ''{0}'' ";
-    public static final String WHERE_APPLICATION_ALREDY_SENT = "WHERE ts2__Job__c = ''{0}''" +
+    private static final String WHERE_APPLICATIONS_PATTERN = " WHERE ts2__Candidate_Contact__c = ''{0}'' ";
+    private static final String WHERE_APPLICATION_ALREDY_SENT = "WHERE ts2__Job__c = ''{0}''" +
             " AND ts2__Candidate_Contact__c = ''{1}''";
+
+    @ManagedProperty(value = "#{salesForceManager}")
+    private SalesForceManager sfManager;
+
+    public void setSfManager(SalesForceManager sfManager) {
+        this.sfManager = sfManager;
+    }
+
+    private SalesForceManager getSfManager() {
+        return sfManager;
+    }
 
     @Override
     public List<Ts2__Application__c> getApplicationsByCandidateID(String candidateID) {
         LOG.trace("Start getApplicationsByCandidateID(), candidateID :: " + candidateID);
-        return getListElementsByParam(QUERY_APPLICATIONS_PATTERN, WHERE_APPLICATIONS_PATTERN, Ts2__Application__c.class,
+        return getSfManager().getListElementsByParam(QUERY_APPLICATIONS_PATTERN, WHERE_APPLICATIONS_PATTERN, Ts2__Application__c.class,
                 candidateID);
     }
 
     @Override
     public boolean isApplicationAlredySent(String candidateID, String jobOrderID) {
         LOG.trace("Start isApplicationAlredySent(), candidateID :: " + candidateID + "; jobOrderID :: " + jobOrderID);
-        String query = buildSqlQuery(QUERY_APPLICATIONS_PATTERN, WHERE_APPLICATION_ALREDY_SENT, jobOrderID, candidateID);
-        SObject[] records = executeQuery(query);
-        return (records != null && records.length > 0);
+        return getSfManager().isNotNullResult(QUERY_APPLICATIONS_PATTERN, WHERE_APPLICATION_ALREDY_SENT,
+                jobOrderID, candidateID);
     }
 
     @Override
-    public SaveResult save(Ts2__Application__c application) {
+    public Ts2__Application__c save(Ts2__Application__c application) {
         LOG.trace("Start save(), application :: " + application);
-        return saveToSalesforce(application);
+        return getSfManager().saveToSalesforce(application);
     }
 }

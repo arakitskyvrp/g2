@@ -4,6 +4,8 @@ import java.util.Map;
 
 /**
  * Interface to obtain data about sources.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 public interface CandidateSourceService {
 

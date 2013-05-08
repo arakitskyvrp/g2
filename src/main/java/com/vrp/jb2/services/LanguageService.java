@@ -1,6 +1,5 @@
 package com.vrp.jb2.services;
 
-import com.sforce.soap.enterprise.sobject.Contact;
 import com.sforce.soap.enterprise.sobject.Language__c;
 
 import java.util.List;
@@ -8,6 +7,8 @@ import java.util.List;
 
 /**
  * Provides opportunities to work with different language locales.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 public interface LanguageService {
 
@@ -17,7 +18,7 @@ public interface LanguageService {
      * @param language language.
      * @return saved language.
      */
-    public Contact save(Language__c language);
+    public Language__c save(Language__c language);
 
     /**
      * Return the list of available languages.

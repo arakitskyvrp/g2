@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * Interface to obtain data about job order.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 public interface JobOrderService {
 

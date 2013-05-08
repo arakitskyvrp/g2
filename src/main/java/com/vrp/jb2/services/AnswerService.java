@@ -7,12 +7,13 @@ import java.util.List;
 
 /**
  * Interface to obtain data about answers.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 public interface AnswerService {
 
     /**
      * Select answer by question id
-     *
      *
      * @param questionID id of question.
      * @return list of answers.

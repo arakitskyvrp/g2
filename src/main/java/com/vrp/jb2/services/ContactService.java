@@ -4,6 +4,8 @@ import com.sforce.soap.enterprise.sobject.Contact;
 
 /**
  * Interface to obtain data about contact.
+ *
+ * @author alexandr.rakitsky@vrpinc.com
  */
 public interface ContactService {
 
@@ -30,4 +32,8 @@ public interface ContactService {
      * @return name of contact.
      */
     public String getNameByID(String contactID);
+
+    public Contact getContactById(String id);
+
+    public boolean updateRecords(Contact[] records);
 }
