@@ -54,14 +54,14 @@ public class JobOrderSOAPService implements JobOrderService {
             "ts2__Interview_Count__c, ts2__JobNotificationsSummary__c, ts2__Offer_Count__c, ts2__Placement_Count__c, " +
             "ts2__Submittal_Count__c, ts2extams__Launch_AMS__c " +
             "FROM ts2__Job__c " +
-            "{0}";
+            " {0}";
 
     private static final String QUERY_JOB_ORDER_BOARD = "Select Id, IsDeleted, Name, CreatedDate, CreatedById, " +
             "LastModifiedDate, LastModifiedById, SystemModstamp, ts2__JobOrder__c, ts2__JobBoardSetup__c " +
             "FROM ts2__JobOrderJobBoardAssociation__c" +
-            "{0} ";
+            " {0} ";
 
-    private static final String WHERE_JOB_BOARD_SETUP = "WHERE ts2__JobBoardSetup__c = ''{0}''";
+    private static final String WHERE_JOB_BOARD_SETUP = " WHERE ts2__JobBoardSetup__c = ''{0}''";
     private static final String WHERE_BY_ID = " WHERE Id = ''{0}''";
     private static final String WHERE_PATTERN = " WHERE {0}";
 
@@ -88,7 +88,7 @@ public class JobOrderSOAPService implements JobOrderService {
         List<Ts2__Job__c> jobs = new ArrayList<Ts2__Job__c>();
 
         List<Ts2__JobOrderJobBoardAssociation__c> listJobOrder = getSfManager().
-                getListElementsByParam(QUERY_JOB_ORDER_BOARD, WHERE_JOB_BOARD_SETUP, Ts2__JobOrderJobBoardAssociation__c.class);
+                getListElementsByParam(QUERY_JOB_ORDER_BOARD, WHERE_JOB_BOARD_SETUP, Ts2__JobOrderJobBoardAssociation__c.class,boardSetupID);
         for (Ts2__JobOrderJobBoardAssociation__c jobOrderJobBoardAssociation : listJobOrder) {
             Ts2__Job__c jobOrder = jobOrderJobBoardAssociation.getTs2__JobOrder__r();
             if (jobOrder != null) {

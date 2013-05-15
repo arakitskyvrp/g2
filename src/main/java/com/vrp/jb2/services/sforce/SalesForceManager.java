@@ -39,6 +39,10 @@ public class SalesForceManager {
         return connectionService;
     }
 
+    public void setConnectionService(SOAPConnectionService connectionService) {
+        this.connectionService = connectionService;
+    }
+
     /**
      * Causes the soap request query and checks the result is not an empty.
      *
@@ -58,7 +62,7 @@ public class SalesForceManager {
     public <T extends SObject> T getElementByParam(String queryPattern, String whereSqlPattern, Class<T> type, Object... params) {
 
         String query = buildSqlQuery(queryPattern, whereSqlPattern, params);
-
+        LOG.debug("Execute query :: " + query);
         SObject[] records = executeQuery(query);
         if (records != null && records.length > 0) {
             SObject record = records[0];

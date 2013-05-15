@@ -44,14 +44,7 @@ public class JobBoardSetupSOAPService implements JobBoardSetupService {
             "ts2__SearchResult1__c, ts2__SearchResult2__c, ts2__SearchResult3__c, ts2__SearchResult4__c, " +
             "ts2__Show_Search_Only__c, ts2__SiteName__c, ts2__SiteURL__c, " +
             "ts2__Source_Tracking_for_External_Referrals__c, ts2__Source_Tracking_for_Internal_Referrals__c, " +
-            "ts2__Veteran__c, Apply_with_LinkedIn__c, RSS_XML_Feeds__c, Languages__c, Countries__c, oAuth_on_off__c, " +
-            "Social_Networks__c, General_Registration__c, Multimedia__c, Thank_You_Page__c, Index_Resume_Upload__c, " +
-            "Index_Cover_Letter__c, Index_Additional_Attachments__c, Index_Multimedia__c, " +
-            "Index_Standard_Questions__c, Custom_Questions__c, Index_Custom_Questions__c, Index_Social_Questions__c, " +
-            "Index_Compliance__c, Index_Forms_URL__c, ts2_Additional_Attachments_Required__c, " +
-            "ts2_Standard_Questions_Required__c, ts2_Custom_Questions_Required__c, ts2_Social_Questions_Required__c, " +
-            "ts2_Compliance_Required__c, ts2_FormsURL_Required__c, I_Accept_Privacy_Statement_Terms_Condi__c, " +
-            "Document_URL__c FROM ts2__Job_Board_Setup__c " +
+            "ts2__Veteran__c FROM ts2__Job_Board_Setup__c " +
             "{0}";
 
     private static final String WHERE_NAME = " WHERE Name = ''{0}''";

@@ -35,7 +35,7 @@ public class AnswerSOAPService implements AnswerService {
 
     private static final String WHERE_BY_QUESTION_ID_PATTERN = "WHERE ts2__Question__c = ''{0}''";
     private static final String WHERE_BY_ANSWERS_ID_PATTERN = "WHERE Id = ''{0}''";
-    private static final String WHERE_BY_ANSWERS_AND_LANGUAGE_PATTERN = " WHERE Answer__c = '{0}' AND Language__c = '{1}' ";
+    private static final String WHERE_BY_ANSWERS_AND_LANGUAGE_PATTERN = " WHERE Answer__c = ''{0}'' AND Language__c = ''{1}'' ";
 
     @ManagedProperty(value = "#{salesForceManager}")
     private SalesForceManager sfManager;
@@ -58,6 +58,10 @@ public class AnswerSOAPService implements AnswerService {
         LOG.trace("Start getAnswersByID(), answersID :: " + answersID);
         return getSfManager().getElementByParam(QUERY_ANSWER_PATTERN, WHERE_BY_ANSWERS_ID_PATTERN, Ts2__Answer__c.class, answersID);
 
+    }
+
+    public List<Ts2__Answer__c> getAll(){
+        return getSfManager().getListElements(QUERY_ANSWER_PATTERN,Ts2__Answer__c.class);
     }
 
     public Answer_Translation__c getAnswerTranslation(String answerID, String languageID) {
